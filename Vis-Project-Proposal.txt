@@ -30,8 +30,8 @@ The proposal will be submitted by uploading it to your team’s GitHub repositor
 1. Basic Information: 
    1. Title: 
    2. Group Members:
-      1. Rebecca Corley (u6036055)
-u6036055@utah.edu
+      1. Rebecca Corley (u6036055) u6036055@utah.edu
+      2. Kevin Mooers (u00600332) u00600332@utah.edu
       2.    3. Link to project repository
 
 
