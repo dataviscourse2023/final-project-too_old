@@ -1,0 +1,118 @@
+﻿Visualization for Data Science Project Proposal
+
+
+
+
+The proposal document should address the following points. Use these points as headers in your document.
+* Basic Info. The project title, your names, e-mail addresses, UIDs, a link to the project repository.
+* Background and Motivation. Discuss your motivations and reasons for choosing this project, especially any background or research interests that may have influenced your decision.
+* Project Objectives. Provide the primary questions you are trying to answer with your visualization. What would you like to learn and accomplish? List the benefits.
+* Data. From where and how are you collecting your data? If appropriate, provide a link to your data sources.
+   * The Climate Impact Lab: tons of data made publicly available, inspiration for visualizations, paper source, kinda anticipating modeling our project after what they are working on.
+   * The Rhodium Group: work with climate impact lab, so data may be similar, but has interesting figures
+   * Climate Central: data on coastal regions, how rising water levels affect those areas, interesting visualizations, open source data, also look at elevation maps, affordable housing, and temperature
+   * GISGeography: data, maps, other stuff
+   * ProPublica: cool scrolly map of data and interesting article
+   * BerkeleyEarth:         lots of data 
+   * NASA and NOAA have tons of data 
+* Data Processing. Do you expect to do substantial data cleanup? What quantities do you plan to derive from your data? How will data processing be implemented?
+* Visualization Design. How will you display your data? Provide some general ideas that you have for the visualization design. Develop three alternative prototype designs for your visualization. Create one final design that incorporates the best of your three designs. Describe your designs and justify your choices of visual encodings. We recommend you use the Five Design Sheet Methodology.
+* Must-Have Features. List the features without which you would consider your project to be a failure.
+* Optional Features. List the features which you consider to be nice to have, but not critical.
+* Project Schedule. Make sure that you plan your work so that you can avoid a big rush right before the final project deadline, and delegate different modules and responsibilities among your team members. Write this in terms of weekly deadlines.
+This proposal is the first part of your process book. As a ballpark number: your proposal should contain about 3-4 pages of text, plus 5-6 pages of sketches.
+The proposal will be submitted by uploading it to your team’s GitHub repository.
+(Note: this is a working draft and I will clean this up and make it look pretty in Latex before submitting - please change/edit anything you’d like)
+
+
+
+
+1. Basic Information: 
+   1. Title: 
+   2. Group Members:
+      1. Rebecca Corley (u6036055) u6036055@utah.edu
+      2. Kevin Mooers (u00600332) u00600332@utah.edu
+      2.    3. Link to project repository
+
+
+
+
+
+
+
+
+   2. Background and Motivation
+It is well-known that Earth’s climate has changed throughout history. Earth cycles through periods of ice ages and warmer temperatures. Nearly 12,000 years ago marked the end of the most recent ice age, which turned into the current climate era. The past eight climate cycles throughout the last 800,000 years are attributed to Earth’s Milankovitch cycles, otherwise known as orbital cycles. The Earth’s orbital shape (eccentricity), axis tilt with respect to the orbital plane (obliquity), and the direction of the spin axis (precession) combine to generate the Milankovitch cycles. As each of these variables change throughout time, the amount of sunlight that Earth absorbs from the Sun also varies, causing long-term cooler and warmer periods. However, the Milankovitch cycles cannot account for all of the climate change throughout Earth’s 4.5 billion year history. The current trend of climate change is undoubtedly accredited to human activity since the pre-industrial period. Since the mid-1800s, human activity has been responsible for generating the atmospheric gasses that trap the Sun’s energy in Earth’s atmosphere. This causes warning temperatures in the atmosphere, on land, and in the ocean, causing rapid, widespread changes in temperature, sea level rising, wildfires, increased humidity, loss of farm crop yields, and damaging economic impact.                 
+Climate models are important tools for understanding the climate system and how it is projected to evolve. [cite Gergel] Tracking variables of temperature, humidity, wildfires, sea levels, farm crop yields, and economic damages allow us to visualize how global regions will be affected by climate change.    
+Designing effective visualizations of these climate models is crucial to communicate the consequences of climate change to the public. If more people are able to understand the repercussions of climate change and how they will affect their lifestyle, we can drive those to make change.     
+
+
+
+
+   3. Project Objectives 
+
+
+
+
+
+
+
+
+
+
+   4. Data
+
+
+
+
+
+
+
+
+
+
+   5. Data Processing
+
+
+
+
+
+
+
+
+
+
+   6. Visualization Design - do together
+
+
+
+
+
+
+
+
+   7. Must-have Features - do together
+Impact maps of the US - temperature, humidity, wildfires,  rising sea level, farm crop yields (?), economic damages (?); scroll + changing map(?);  
+
+
+
+
+
+
+
+
+
+
+   8. Optional Features - do together
+Global impact map
+
+
+
+
+
+
+
+
+
+
+   9. Project Schedule
