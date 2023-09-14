@@ -1,3 +1,8 @@
+.images{
+    width: 200px;
+
+}
+
 .image_background{
     width: 300px;
     height: 500px;
@@ -5,4 +10,8 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.image:hover{
+    background-image: url(../images/duck_mouseover.jpg);
 }
