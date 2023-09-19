@@ -21,7 +21,8 @@ function readData(data) {
     return data;
 }
 
-function request_temp(file = "./temp.json"){
+// #temp_request button function
+function temp_request(file = "./temp.json"){
     let data = fetchJSONFile(file, readData);
 }
 
