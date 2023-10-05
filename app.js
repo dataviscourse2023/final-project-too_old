@@ -1,28 +1,9 @@
-// template for fetching json. Takes a callback function to handle the data fetched.
-function fetchJSONFile(path, callback) {
-    let httpRequest = new XMLHttpRequest();
-    httpRequest.onreadystatechange = function () {
-        if (httpRequest.readyState === 4) {
-            if (httpRequest.status === 200) {
-                let data = JSON.parse(httpRequest.responseText);
-                if (callback) {
-                    callback(data);
-                }
-            }
-        }
-    };
-    httpRequest.open('GET', path);
-    httpRequest.send();
-}
+import * as fetch from "/data/fetch.js"
 
-// callback function for fetching data. logs the data and returns the data object
-function readData(data) {
-    console.log(data);
-    return data;
-}
+document.getElementById("temp_request").onclick = function () {temp_request("./temp.json")}
 
 // #temp_request button function
-function temp_request(file = "./temp.json"){
-    let data = fetchJSONFile(file, readData);
+function temp_request(file){
+    let data = fetch.fetchJSONFile(file, fetch.readData);
 }
 
