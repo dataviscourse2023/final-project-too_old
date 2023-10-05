@@ -105,8 +105,9 @@ body{
 }
 
 .graphics{
-    background: var(--color-primary-0);
+    background: var(--color-black-0);
     justify-content: left;
+    padding: 1px 20px;
 }
 
 .button_request{
