@@ -1,31 +1,37 @@
-import * as fetch from "./../data/fetch.js"
 export {setup};
 
-// Constants for the charts, that would be useful.
-const CHART_WIDTH = 500;
-const CHART_HEIGHT = 250;
-const MARGIN = { left: 50, bottom: 20, top: 20, right: 20 };
-const ANIMATION_DUATION = 300;
+console.log("here is hr.js")
+console.log("calling hr.js setup()")
+setup();
 
 function setup () {
   //set up initial chart spaces
-  let scatterPlot = d3.select("#button_result").append("svg").attr("class","scatter-plot");
-
-  for(chart of [scatterPlot]){
-    chart.append("g").attr("class", "xAxis")
-    chart.append("g").attr("class", "yAxis")
-  }
-
-  //call changeData to update data
-  changeData();
+  let scatterPlot = d3.select("#temp_result").append("svg").attr("class","scatter-plot");
+  scatterPlot.append("g").attr("class", "xAxis")
+  scatterPlot.append("g").attr("class", "yAxis")
+  //set up event listeners
+  //call loadData to update data
+  loadData();
 }
 
 /**
  * Update the data according to document settings
  */
-function changeData () {
-  let data = fetch.fetchJSONFile(file, fetch.readData);
-  update(data);
+function loadData (source = "hr/data/covid_ca.csv") {
+  d3.csv(source)
+    .then(dataOutput => {
+      /*data wrangling*/
+      const data = dataOutput.map((d) => ({
+        cases: parseInt(d.cases),
+        deaths: parseInt(d.deaths),
+        date: d3.timeFormat("%m/%d")(d3.timeParse("%d-%b")(d.date))
+      }));
+        console.log(data)
+        update(data);
+    }).catch(e => {
+      console.log(e);
+      alert('Error!');
+    });
 }
 
 /**
@@ -33,8 +39,7 @@ function changeData () {
  * @param data
  */
 function update (data) {
-  console.log(data)
-  // updateScatterPlot(data, d3.select("svg.scatter-plot"));
+  updateScatterPlot(data, d3.select("svg.scatter-plot"));
 }
 
 
