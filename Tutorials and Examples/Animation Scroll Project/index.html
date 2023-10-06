@@ -3,20 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Star is Born: Visualizing Stellar Evolution</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
-    <title>Animation Scroll Infrastructure</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script> <!-- d3 script -->
+    <script type="module" src="app.js"></script>
 </head>
 <body>
-    <header>Hello</header>
-    <div class="annotated_chart">
-        <span class="textbox">Text</span>
+    <nav class="navbar">
+        <div class="navbar_container">
+            <p class="title">A Star is Born: Visualizing Stellar Evolution</p>
+            <a href="/index.html" id="navbar_logo">Home</a>
+        </div>
+    </nav>
+    <div class="parallax-wrapper">
+        <div class="content">
+            <p>"Hello this is content in the parallax wrapper (1)"</p>
+        </div>
     </div>
-    <img class="images" src="images/duck.jpg" alt="duck">
-    <div class="image_background"></div>
-    <div class="annotated_chart">Hello</div>
-    <div class="image_background">Hello</div>
-
-
+    <div class="regular-wrapper">
+        <div class="content">
+            <p>"Hello this is content in the regular wrapper (2)"</p>
+            <div class="block graphics" id="hr-div"></div>
+            <div class="block textbox">
+                <div class="block textbox textbox-floater">Hello</div>
+            </div>
+            <div class="block graphics" id="hr-div2"></div>
+        </div>
+    </div>
+    <div class="parallax-wrapper">
+        <div class="content">
+            <p>"Hello this is content in the parallax wrapper (3)"</p>
+            <div class="block graphics" id="hr-div"></div>
+            <div class="block textbox">
+                <div class="block textbox textbox-floater">Hello</div>
+            </div>
+            <div class="block graphics" id="hr-div2"></div>
+        </div>
+    </div>
 </body>
 </html>
