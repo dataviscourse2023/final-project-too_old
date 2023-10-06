@@ -1,7 +1,13 @@
+// public functions
 export {init};
 
-console.log("here is hr.js")
+// Script globals
+const CHART_HEIGHT = 575
+const CHART_WIDTH = 1000
 
+/**
+ * Initialize chart svg, listeners, and fetch data
+ */
 function init () {
   //set up initial chart spaces
   let hrScatterPlot = d3.select("#hr-div").append("svg").attr("class","scatter-plot").attr("id", "hr");
@@ -54,8 +60,8 @@ function update (data) {
 function updateScatterPlot (data, svg) {
  
   // Declare the chart dimensions and margins.
-  const width = 500;
-  const height = 250;
+  const width = CHART_WIDTH;
+  const height = CHART_HEIGHT;
   const marginTop = 30;
   const marginRight = 30;
   const marginBottom = 30;

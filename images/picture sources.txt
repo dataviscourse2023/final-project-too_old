@@ -1,1 +1,3 @@
 background1: https://unsplash.com/photos/hNQwIirOseE
+background2: https://unsplash.com/photos/Bvo2-SNi0rw
+background3: https://unsplash.com/photos/wMx2XgU8er8
