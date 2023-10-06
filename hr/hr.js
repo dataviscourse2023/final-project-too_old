@@ -1,14 +1,18 @@
-export {setup};
+export {init};
 
 console.log("here is hr.js")
-console.log("calling hr.js setup()")
-setup();
 
-function setup () {
+function init () {
   //set up initial chart spaces
-  let scatterPlot = d3.select("#temp_result").append("svg").attr("class","scatter-plot");
-  scatterPlot.append("g").attr("class", "xAxis")
-  scatterPlot.append("g").attr("class", "yAxis")
+  let hrScatterPlot = d3.select("#hr-div").append("svg").attr("class","scatter-plot").attr("id", "hr");
+  let oneScatterPlot = d3.select("#hr-div2").append("svg").attr("class","scatter-plot").attr("id", "hr2");
+
+  for(let chart of [hrScatterPlot, oneScatterPlot]){
+    chart.append("g").attr("class", "xAxis")
+    chart.append("g").attr("class", "yAxis")
+  }
+
+
   //set up event listeners
   //call loadData to update data
   loadData();
@@ -39,7 +43,8 @@ function loadData (source = "hr/data/covid_ca.csv") {
  * @param data
  */
 function update (data) {
-  updateScatterPlot(data, d3.select("svg.scatter-plot"));
+  updateScatterPlot(data, d3.select("#hr"));
+  updateScatterPlot(data, d3.select("#hr2"));
 }
 
 
@@ -83,7 +88,7 @@ function updateScatterPlot (data, svg) {
     .transition()
       .attr("cx", (d) => x(d.cases))
       .attr("cy", (d) => y(d.deaths))
-      .attr("r", 5);
+      .attr("r", 3);
 
   //Add mouseover and onclick events. Why does this only work after changing the data?
   dots.on('mouseover', function (event, d) {
