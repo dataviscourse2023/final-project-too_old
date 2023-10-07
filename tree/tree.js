@@ -3,20 +3,10 @@
 // Script globals
 const CHART_HEIGHT = 760
 const CHART_WIDTH = 400
+const DIV_ID = "#tree-div"
 
-let treeData = {
-    "name": "Top Level",
-    "children": [
-        { 
-        "name": "Level 2: A",
-        "children": [
-            { "name": "Son of A" },
-            { "name": "Daughter of A" }
-        ]
-        },
-        { "name": "Level 2: B" }
-    ]
-};
+// Declare initial objects
+let treeData = await d3.json("tree/data/data.json");
 
 // Set the dimensions and margins of the diagram
 let margin  = {top: 20, right: 90, bottom: 30, left: 90};
@@ -26,7 +16,7 @@ let height  = CHART_WIDTH - margin.top - margin.bottom;
 // append the svg object to the body of the page
 // appends a 'group' element to 'svg'
 // moves the 'group' element to the top left margin
-let svg = d3.select("body").append("svg")
+let svg = d3.select(DIV_ID).append("svg")
     .attr("width", width + margin.right + margin.left)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -84,9 +74,9 @@ function update(source) {
     let nodeEnter = node.enter().append('g')
         .attr('class', 'node')
         .attr("transform", d => {
-        return "translate(" + source.y0 + "," + source.x0 + ")";
-    })
-    .on('click', click);
+            return "translate(" + source.y0 + "," + source.x0 + ")";
+        })
+        .on('click', click);
 
     // Add Circle for the nodes
     nodeEnter.append('circle')
@@ -106,14 +96,14 @@ function update(source) {
 
     // Transition to the proper position for the node
     nodeUpdate.transition()
-    .duration(duration)
-    .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
+        .duration(duration)
+        .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
 
     // Update the node attributes and style
     nodeUpdate.select('circle.node')
-    .attr('r', 10)
-    .style("fill", d => d._children ? "lightsteelblue" : "#fff")
-    .attr('cursor', 'pointer');
+        .attr('r', 10)
+        .style("fill", d => d._children ? "lightsteelblue" : "#fff")
+        .attr('cursor', 'pointer');
 
 
     // Remove any exiting nodes
@@ -124,11 +114,11 @@ function update(source) {
 
     // On exit reduce the node circles size to 0
     nodeExit.select('circle')
-    .attr('r', 1e-6);
+        .attr('r', 1e-6);
 
     // On exit reduce the opacity of text labels
     nodeExit.select('text')
-    .style('fill-opacity', 1e-6);
+        .style('fill-opacity', 1e-6);
 
     // ****************** links section ***************************
 
@@ -140,8 +130,8 @@ function update(source) {
     let linkEnter = link.enter().insert('path', "g")
         .attr("class", "link")
         .attr('d', d => {
-        let o = {x: source.x0, y: source.y0}
-        return diagonal(o, o)
+            let o = {x: source.x0, y: source.y0}
+            return diagonal(o, o)
         });
 
     // UPDATE
@@ -156,38 +146,36 @@ function update(source) {
     let linkExit = link.exit().transition()
         .duration(duration)
         .attr('d', d => {
-        let o = {x: source.x, y: source.y}
-        return diagonal(o, o)
+            let o = {x: source.x, y: source.y}
+            return diagonal(o, o)
         })
         .remove();
 
     // Store the old positions for transition.
     nodes.forEach(d => {
-    d.x0 = d.x;
-    d.y0 = d.y;
+        d.x0 = d.x;
+        d.y0 = d.y;
     });
 
     // Creates a curved (diagonal) path from parent to the child nodes
     function diagonal(s, d) {
-
-    path = `M ${s.y} ${s.x}
-            C ${(s.y + d.y) / 2} ${s.x},
-                ${(s.y + d.y) / 2} ${d.x},
-                ${d.y} ${d.x}`
-
-    return path
+        path = `M ${s.y} ${s.x}
+                C ${(s.y + d.y) / 2} ${s.x},
+                    ${(s.y + d.y) / 2} ${d.x},
+                    ${d.y} ${d.x}`
+        return path
     }
 
     // Toggle children on click.
     function click(event, d) {
-    console.log("Hello")
-    if (d.children) {
-        d._children = d.children;
-        d.children = null;
-        } else {
-        d.children = d._children;
-        d._children = null;
-        }
-    update(d);
+        console.log("Hello")
+        if (d.children) {
+            d._children = d.children;
+            d.children = null;
+            } else {
+            d.children = d._children;
+            d._children = null;
+            }
+        update(d);
     }
 }
