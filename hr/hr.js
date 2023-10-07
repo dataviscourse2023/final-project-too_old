@@ -4,6 +4,7 @@ export {init};
 // Script globals
 const CHART_HEIGHT = 575
 const CHART_WIDTH = 1000
+const DIV_ID = "#hr-div"
 
 /**
  * Initialize chart svg, listeners, and fetch data
@@ -11,9 +12,8 @@ const CHART_WIDTH = 1000
 function init () {
   //set up initial chart spaces
   let hrScatterPlot = d3.select("#hr-div").append("svg").attr("class","scatter-plot").attr("id", "hr");
-  let oneScatterPlot = d3.select("#hr-div2").append("svg").attr("class","scatter-plot").attr("id", "hr2");
 
-  for(let chart of [hrScatterPlot, oneScatterPlot]){
+  for(let chart of [hrScatterPlot]){
     chart.append("g").attr("class", "xAxis")
     chart.append("g").attr("class", "yAxis")
   }
@@ -50,7 +50,6 @@ function loadData (source = "hr/data/covid_ca.csv") {
  */
 function update (data) {
   updateScatterPlot(data, d3.select("#hr"));
-  updateScatterPlot(data, d3.select("#hr2"));
 }
 
 
