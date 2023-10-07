@@ -110,7 +110,6 @@ body{
 
 .content-left, content-right{
     background: var(--color-black-0);
-    display: flex;
     justify-content: space-between;
     min-height: 40px;
     z-index: 1;
@@ -147,4 +146,21 @@ svg{
 
 .scatter-plot .hovered {
     fill: var(--color-complement-0);
+}
+
+/* tree elements */
+.node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 3px;
+}
+
+.node text {
+    font: 12px sans-serif;
+}
+
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 2px;
 }
