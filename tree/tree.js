@@ -11,7 +11,7 @@ const DIV_ID = "#tree-div"
 
 
 // Declare initial objects
-let treeData = await d3.json("tree/data/data.json");
+let treeData = await d3.json("tree/data.json");
 
 // Set the dimensions and margins of the diagram
 let margin  = {top: 20, right: 90, bottom: 30, left: 90};

@@ -27,7 +27,7 @@ function init () {
 /**
  * Update the data according to document settings
  */
-function loadData (source = "hr/data/covid_ca.csv") {
+function loadData (source = "hr/covid_ca.csv") {
   d3.csv(source)
     .then(dataOutput => {
       /*data wrangling*/
