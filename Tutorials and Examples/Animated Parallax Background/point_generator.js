@@ -4,9 +4,29 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-function generatePoint() {
+function generatePoint(max) {
     let string = "";
-    return string.concat("a", "B")
+    return string.concat(getRandomInt(max), "px ", getRandomInt(max), "px #fff")
 }
-console.log(getRandomInt(2000))
-console.log(generatePoint())
+
+function generateManyPoints(numPoints, max){
+    let string = "";
+    if( numPoints > 1 ){
+        // call generatePoint and concatentate the list of points
+        for ( let i = 0; i < numPoints; i++ ) {
+            let point = generatePoint(max);
+            string = string.concat(point, ", ")
+        }
+
+        // remove trailing comma
+        string = string.trim();
+        if(string.slice(-1) == ','){
+            string = string.slice(0, -1);
+        }
+
+        return string;
+    } else {
+        return "error";
+    }
+}
+console.log(generateManyPoints(2000, 4000))
