@@ -4,17 +4,17 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-function generatePoint(max) {
+function generatePoint(Xmax, Ymax) {
     let string = "";
-    return string.concat(getRandomInt(max), "px ", getRandomInt(max), "px #fff")
+    return string.concat(getRandomInt(Xmax), "px ", getRandomInt(Ymax), "px #fff")
 }
 
-function generateManyPoints(numPoints, max){
+function generateManyPoints(numPoints, Xmax, Ymax){
     let string = "";
     if( numPoints > 1 ){
         // call generatePoint and concatentate the list of points
         for ( let i = 0; i < numPoints; i++ ) {
-            let point = generatePoint(max);
+            let point = generatePoint(Xmax, Ymax);
             string = string.concat(point, ", ")
         }
 
@@ -31,7 +31,7 @@ function generateManyPoints(numPoints, max){
 }
 
 // generate points and print to file
-let points = generateManyPoints(2000, 4000)
+let points = generateManyPoints(400, 2000, 4000)
 const fs = require('fs')
 fs.writeFile('points.txt', points, (err) => {
     if (err) throw err;
