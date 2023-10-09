@@ -29,4 +29,10 @@ function generateManyPoints(numPoints, max){
         return "error";
     }
 }
-console.log(generateManyPoints(2000, 4000))
+
+// generate points and print to file
+let points = generateManyPoints(2000, 4000)
+const fs = require('fs')
+fs.writeFile('points.txt', points, (err) => {
+    if (err) throw err;
+})
