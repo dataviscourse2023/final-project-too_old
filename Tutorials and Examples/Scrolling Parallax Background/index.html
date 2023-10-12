@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallax Star Background</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <section class="wrapper" id="starWrapper">
+        <div id="stars" class="rellax" data-rellax-speed="6"></div>
+        <div id="stars2" class="rellax" data-rellax-speed="4"></div>
+        <div id="stars3" class="rellax" data-rellax-speed="2"></div>
+    </section>
+    <div id="title">
+        <span>PURE CSS</span>
+        <br>
+        <span>PARALLAX PIXEL BACKGROUND</span>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.12.1/rellax.min.js" 
+        integrity="sha512-f5HTYZYTDZelxS7LEQYv8ppMHTZ6JJWglzeQmr0CVTS70vJgaJiIO15ALqI7bhsracojbXkezUIL+35UXwwGrQ==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    <script>
+        // init rellax
+        let rellax = new Rellax('.rellax');
+    </script>
+</body>
+</html>
