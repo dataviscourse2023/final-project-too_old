@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>A Star is Born: Visualizing Stellar Evolution</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="foreground">
+    <section class="foreground">
         <div id="title">
-            <span>CSS Flexbox Placement</span>
+            <span>A Star is Born: Visualizing Stellar Evolution</span>
         </div>
         <div class="container">
             <div class="wrapper">
@@ -25,7 +25,20 @@
                 <div class="graphic"></div>
             </div>
         </div>
-    </div>
-    <div class="background"></div>
+    </section>
+
+    <section class="background" id="starWrapper">
+        <div id="stars" class="rellax" data-rellax-speed="6"></div>
+        <div id="stars2" class="rellax" data-rellax-speed="4"></div>
+        <div id="stars3" class="rellax" data-rellax-speed="2"></div>
+    </section>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.12.1/rellax.min.js" 
+        integrity="sha512-f5HTYZYTDZelxS7LEQYv8ppMHTZ6JJWglzeQmr0CVTS70vJgaJiIO15ALqI7bhsracojbXkezUIL+35UXwwGrQ==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    <script>
+        // init rellax
+        let rellax = new Rellax('.rellax');
+    </script>
 </body>
 </html>

@@ -38,7 +38,6 @@ html {
     height: 3px;
     background: transparent;
     background-position-y: 100%;
-    /* animation: animStar 120s linear infinite; */
     box-shadow: var(--stars1);
     background-attachment: fixed;
 }
@@ -57,7 +56,6 @@ html {
     width: 2px;
     height: 2px;
     background: transparent;
-    /* animation: animStar 180s linear infinite; */
     box-shadow: var(--stars2);
 }
 
@@ -75,7 +73,6 @@ html {
     width: 1px;
     height: 1px;
     background: transparent;
-    /* animation: animStar 240s linear infinite; */
     box-shadow: var(--stars3);
 }
 
@@ -87,16 +84,6 @@ html {
     height: 1px;
     background: transparent;
     box-shadow: var(--stars3after);
-}
-
-
-@keyframes animStar {
-    from {
-        transform: translateY(0px);
-    }
-    to {
-        transform: translateY(-2000px);
-    }
 }
 
 /* root contains randomly generated points for stars1, stars1::after, stars2, stars2::after, stars3, and stars3::after
