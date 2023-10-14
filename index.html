@@ -4,16 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Star is Born: Visualizing Stellar Evolution</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script> <!-- d3 script -->
-    <script type="module" src="app.js"></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">  
+    <link rel="stylesheet" href="styles_stars.css">  <!-- Background Styling -->
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar_container">
-            <p class="title">A Star is Born: Visualizing Stellar Evolution</p>
-            <a href="/index.html" id="navbar_logo">Home</a>
+    <section class="foreground">
+        <div id="title">
+            <span>A Star is Born: Visualizing Stellar Evolution</span>
         </div>
-    </nav>
+        <div class="container">
+            <div class="wrapper">
+                <div class="textbox">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, quod.</div>
+                <div class="graphic"></div>
+            </div>
+            <div class="wrapper">
+                <div class="textbox">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores impedit a animi recusandae. Omnis consequuntur beatae quaerat impedit! Excepturi, reiciendis?</div>
+                <div class="graphic"></div>
+            </div>
+            <div class="wrapper">
+                <div class="textbox">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore illo esse a, ullam quos porro sint molestias corrupti dignissimos nobis.</div>
+                <div class="graphic"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="background" id="starWrapper">
+        <div id="stars" class="rellax" data-rellax-speed="6"></div>
+        <div id="stars2" class="rellax" data-rellax-speed="4"></div>
+        <div id="stars3" class="rellax" data-rellax-speed="2"></div>
+    </section>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.12.1/rellax.min.js" 
+        integrity="sha512-f5HTYZYTDZelxS7LEQYv8ppMHTZ6JJWglzeQmr0CVTS70vJgaJiIO15ALqI7bhsracojbXkezUIL+35UXwwGrQ==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    <script>
+        // init rellax
+        let rellax = new Rellax('.rellax');
+    </script>
 </body>
 </html>
