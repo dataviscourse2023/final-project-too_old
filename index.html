@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Star is Born: Visualizing Stellar Evolution</title>
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="styles.css">  
-    <link rel="stylesheet" href="styles_stars.css">  <!-- Background Styling -->
+    <link rel="stylesheet" href="styles.css">               <!-- general styling -->
+    <link rel="stylesheet" href="styles_d3.css">            <!-- styling for data visualizations using d3 -->
+    <link rel="stylesheet" href="styles_stars.css">         <!-- background styling -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>   <!-- d3 library script -->
+    <script type="module" src="app.js"></script>            <!-- data visualizations using d3 -->
 </head>
 <body>
     <section class="foreground">
@@ -16,11 +19,11 @@
         <div class="container">
             <div class="wrapper">
                 <div class="textbox">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, quod.</div>
-                <div class="graphic"></div>
+                <div class="graphic" id="tree-div"></div>
             </div>
             <div class="wrapper">
                 <div class="textbox">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores impedit a animi recusandae. Omnis consequuntur beatae quaerat impedit! Excepturi, reiciendis?</div>
-                <div class="graphic"></div>
+                <div class="graphic" id="hr-div"></div>
             </div>
             <div class="wrapper">
                 <div class="textbox">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore illo esse a, ullam quos porro sint molestias corrupti dignissimos nobis.</div>

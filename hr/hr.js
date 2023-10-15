@@ -2,8 +2,8 @@
 export {init};
 
 // Script globals
-const CHART_HEIGHT = 575
-const CHART_WIDTH = 1000
+const CHART_HEIGHT = 600
+const CHART_WIDTH = 1200
 const DIV_ID = "#hr-div"
 
 /**
@@ -12,6 +12,7 @@ const DIV_ID = "#hr-div"
 function init () {
   //set up initial chart spaces
   let hrScatterPlot = d3.select("#hr-div").append("svg").attr("class","scatter-plot").attr("id", "hr");
+  console.log(hrScatterPlot);
 
   for(let chart of [hrScatterPlot]){
     chart.append("g").attr("class", "xAxis")

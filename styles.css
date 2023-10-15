@@ -13,7 +13,7 @@
     --color-complement-4:#FFC86D;
     --color-black-0:#000000;
     --color-black-1:#404040;
-    --color-black-2:#f0f0f0;
+    --color-black-2:#808080;
     --color-black-3:#bfbfbf;
     --color-black-4:#ffffff;
 }
@@ -69,26 +69,27 @@ html {
 }
 
 #title span {
-    background: -webkit-linear-gradient(white, #38495a);
+    background: -webkit-linear-gradient(white, #5d768f);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .wrapper {
-    background-color: white;
+    background-color: transparent;
 }
 
 .textbox{
     height: 10vh;
     padding: 10px;
+    background-color: var(--color-primary-2);
 }
 
 .graphic {
     height: 60vh;
     width: 70vw;
-    min-height: 500px;
+    min-height: 600px;
     min-width: 1200px;
-    background-color: red;
+    background-color: var(--color-primary-1);
 }
 
