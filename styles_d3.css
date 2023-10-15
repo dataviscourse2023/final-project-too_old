@@ -14,11 +14,10 @@ svg{
     fill: var(--color-complement-0);
 }
 
-.scatter-plot path, 
+/* .scatter-plot path, 
 .scatter-plot line,
 .scatter-plot text {
-    /* stroke: var(--color-black-0);     */
-}
+} */
 
 /* tree elements */
 .node circle {
