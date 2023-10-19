@@ -1,5 +1,5 @@
-// public functions
-export {init};
+// call init on load
+init();
 
 // Script globals
 const CHART_HEIGHT = 600

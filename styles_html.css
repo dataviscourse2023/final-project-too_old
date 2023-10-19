@@ -23,13 +23,13 @@ html {
 #title{
     position: absolute;
     top: 0px;
-    left: 50%;
-    transform: translate( -50%, 0% );
     height: 120px;
+    width: 100%;
     padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     color: white;
     font-family: Lato;
     font-weight: 300;
