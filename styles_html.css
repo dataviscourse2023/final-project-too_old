@@ -59,13 +59,13 @@ html {
 
 .wrapper {
     background-color: transparent;
+    border: 3px solid var(--color-secondary-1-1);
 }
 
 .textbox{
     height: 10vh;
     padding: 10px;
     background-color: var(--color-primary-1);
-    border: 3px solid var(--color-secondary-2-0);
 }
 
 .graphic {
