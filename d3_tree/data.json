@@ -8,7 +8,12 @@
       "name": "Seth",
       "children": [
         {
-          "name": "Enos"
+          "name": "Enos",
+          "children": [
+            {
+              "name": "Barry"
+            }
+          ]
         },
         {
           "name": "Noam"

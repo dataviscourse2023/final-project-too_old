@@ -65,7 +65,7 @@ html {
 .textbox{
     height: 10vh;
     padding: 10px;
-    background-color: var(--color-primary-1);
+    background-color: var(--color-primary-4);
 }
 
 .graphic {
