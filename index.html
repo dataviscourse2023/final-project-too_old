@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="styles_palette.css">       <!-- color palette -->
     <link rel="stylesheet" href="styles_d3.css">            <!-- styling for data visualizations using d3 -->
     <link rel="stylesheet" href="styles_background.css">    <!-- background styling -->
+    <!-- Scripts -->
     <script src="https://d3js.org/d3.v7.min.js"></script>   <!-- d3 library script -->
     <script type="module" src="app.js"></script>            <!-- data visualizations using d3 -->
 </head>
 <body>
+    <!-- Foreground -->
     <section class="foreground">
         <div id="title">
             <span>A Star is Born: Visualizing Stellar Evolution</span>
@@ -33,17 +35,18 @@
         </div>
     </section>
 
+    <!-- Background -->
     <section class="background" id="starWrapper">
         <div id="stars" class="rellax" data-rellax-speed="6"></div>
         <div id="stars2" class="rellax" data-rellax-speed="4"></div>
         <div id="stars3" class="rellax" data-rellax-speed="2"></div>
     </section>
     
+    <!-- Background Parallax Effect -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.12.1/rellax.min.js" 
         integrity="sha512-f5HTYZYTDZelxS7LEQYv8ppMHTZ6JJWglzeQmr0CVTS70vJgaJiIO15ALqI7bhsracojbXkezUIL+35UXwwGrQ==" 
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
     <script>
-        // init rellax
         let rellax = new Rellax('.rellax');
     </script>
 </body>
