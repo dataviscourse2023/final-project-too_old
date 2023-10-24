@@ -3,8 +3,6 @@ const CHART_HEIGHT = 600
 const CHART_WIDTH = 1200
 const DIV_ID = "#hr-div"
 const sourceFile = "./d3_hr/isochrone.csv"
-const xColumn = "logTe"
-const yColumn = "logL" 
 
 // call init on load
 init();
@@ -63,7 +61,10 @@ function update (data) {
  * update the scatter plot.
  */
 function updateScatterPlot (data, svg) {
- 
+  // Declare which columns we will be using for x and y columns
+  const xColumn = "logTe"
+  const yColumn = "logL" 
+
   // Declare the chart dimensions and margins.
   const width = CHART_WIDTH;
   const height = CHART_HEIGHT;
@@ -74,13 +75,14 @@ function updateScatterPlot (data, svg) {
 
   // Declare the x (horizontal position) scale.
   //NOTE: SCALE IS BACKWARDS FOR TEMPERATURE
+  let xbuffer = 0.1;
   let xMin = d3.min(data, (d) => d[xColumn]);
   let xMax = d3.max(data, (d) => d[xColumn]);
   let xDomain = new Array();
   if(xColumn === "logTe"){
-      xDomain.push(xMax, xMin)
+      xDomain.push(xMax + xbuffer, xMin - xbuffer)
     }else{
-      xDomain.push(xMin, xMax)
+      xDomain.push(xMin - xbuffer, xMax + xbuffer)
     };
 
   const x = d3.scaleLinear()
@@ -88,8 +90,9 @@ function updateScatterPlot (data, svg) {
     .range([marginLeft, width - marginRight])
   
   // Declare the y (vertical position) scale.
+  let ybuffer = 1;
   const y = d3.scaleLinear()
-    .domain([d3.min(data, (d) => d[yColumn]), d3.max(data, (d) => d[yColumn])])
+    .domain([d3.min(data, (d) => d[yColumn]) - ybuffer, d3.max(data, (d) => d[yColumn]) + ybuffer])
     .range([height - marginBottom, marginTop])
 
   const yTicks = y.ticks()
