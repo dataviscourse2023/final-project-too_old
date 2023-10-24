@@ -1,10 +1,13 @@
-// call init on load
-init();
-
 // Script globals
 const CHART_HEIGHT = 600
 const CHART_WIDTH = 1200
 const DIV_ID = "#hr-div"
+const sourceFile = "./d3_hr/isochrone.csv"
+const xColumn = "logTe"
+const yColumn = "logL" 
+
+// call init on load
+init();
 
 /**
  * Initialize chart svg, listeners, and fetch data
@@ -22,20 +25,22 @@ function init () {
 
   //set up event listeners
   //call loadData to update data
-  loadData();
+  loadData(sourceFile);
 }
 
 /**
  * Update the data according to document settings
  */
-function loadData (source = "./d3_hr/covid_ca.csv") {
+function loadData (source) {
   d3.csv(source)
     .then(dataOutput => {
       /*data wrangling*/
       const data = dataOutput.map((d) => ({
-        cases: parseInt(d.cases),
-        deaths: parseInt(d.deaths),
-        date: d3.timeFormat("%m/%d")(d3.timeParse("%d-%b")(d.date))
+        logAge: parseInt(d.logAge), 
+        mass: parseFloat(d.Mass),
+        logL: parseFloat(d.logL),
+        logTe: parseFloat(d.logTe),
+        Gmag: parseFloat(d.Gmag)
       }));
         console.log(data)
         update(data);
@@ -68,13 +73,23 @@ function updateScatterPlot (data, svg) {
   const marginLeft = 60;
 
   // Declare the x (horizontal position) scale.
+  //NOTE: SCALE IS BACKWARDS FOR TEMPERATURE
+  let xMin = d3.min(data, (d) => d[xColumn]);
+  let xMax = d3.max(data, (d) => d[xColumn]);
+  let xDomain = new Array();
+  if(xColumn === "logTe"){
+      xDomain.push(xMax, xMin)
+    }else{
+      xDomain.push(xMin, xMax)
+    };
+
   const x = d3.scaleLinear()
-    .domain([0, d3.max(data, (d) => d.cases)])  
+    .domain(xDomain)
     .range([marginLeft, width - marginRight])
   
   // Declare the y (vertical position) scale.
   const y = d3.scaleLinear()
-    .domain([0, d3.max(data, (d) => d.deaths)])
+    .domain([d3.min(data, (d) => d[yColumn]), d3.max(data, (d) => d[yColumn])])
     .range([height - marginBottom, marginTop])
 
   const yTicks = y.ticks()
@@ -92,9 +107,9 @@ function updateScatterPlot (data, svg) {
   dots.enter().append("circle")
     .merge(dots) 
     .transition()
-      .attr("cx", (d) => x(d.cases))
-      .attr("cy", (d) => y(d.deaths))
-      .attr("r", 3);
+      .attr("cx", (d) => x(d[xColumn]))
+      .attr("cy", (d) => y(d[yColumn]))
+      .attr("r", 2);
 
   //Add mouseover and onclick events. Why does this only work after changing the data?
   dots.on('mouseover', function (event, d) {
@@ -111,7 +126,7 @@ function updateScatterPlot (data, svg) {
     })
 
   dots.on("click", function(event, d){
-    console.log("Cases: " + d.cases + ", Deaths: " + d.deaths)
+    console.log("x: " + d[xColumn] + ", y: " + d[yColumn])
     })
 
   // Update the X Axis
