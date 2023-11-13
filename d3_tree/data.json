@@ -1,38 +1,61 @@
 {
-  "name": "Eve",
+  "name": "Nebula",
+  "image": "",
   "children": [
     {
-      "name": "Cain"
-    },
-    {
-      "name": "Seth",
+      "name": "Low-Mass Main Sequence",
+      "image": "",
       "children": [
         {
-          "name": "Enos",
+          "name": "Red Giant",
+          "image": "",
           "children": [
             {
-              "name": "Barry"
+              "name": "Planetary Nebula",
+              "image": "",
+              "children": [
+                {
+                  "name": "White Dwarf",
+                  "image": "",
+                  "children": [
+        
+                  ]
+                }
+              ]
             }
           ]
-        },
-        {
-          "name": "Noam"
         }
       ]
     },
     {
-      "name": "Abel"
-    },
-    {
-      "name": "Awan",
+      "name": "High-Mass Main Sequence",
+      "image": "",
       "children": [
         {
-          "name": "Enoch"
+          "name": "Red Supergiant",
+          "image": "",
+          "children": [
+            {
+              "name": "Supernova",
+              "image": "",
+              "children": [
+                {
+                  "name": "Neutron Star",
+                  "image": "",
+                  "children": [
+                  ]
+                },
+                {
+                  "name": "Black Hole",
+                  "image": "",
+                  "children": [
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
-    },
-    {
-      "name": "Azura"
     }
   ]
 }
