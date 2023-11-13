@@ -7,7 +7,7 @@ svg{
 
 /* style of scatter plot */
 .scatter-plot circle {
-    fill: var(--color-primary-0);
+    fill: var(--color-secondary-2-1);
 }
 
 .scatter-plot .hovered {
