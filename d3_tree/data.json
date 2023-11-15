@@ -1,7 +1,8 @@
 {
   "name": "Nebula",
   "image": "low-mass.jpg",
-  "source": "https://chandra.si.edu/photo/2005/orion/",
+  "image_source": "https://chandra.si.edu/photo/2005/orion/",
+  "description": "lorem ipsum",
   "children": [
     {
       "name": "Low-Mass Main Sequence",
