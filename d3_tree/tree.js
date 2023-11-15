@@ -5,8 +5,8 @@
 // example taken from https://www.dataviscourse.net/tutorials/lectures/lecture-d3-layouts/
 
 // Script globals
-const CHART_HEIGHT = 575
-const CHART_WIDTH = 1000
+const CHART_HEIGHT = 600
+const CHART_WIDTH = 1200
 const DIV_ID = "#tree-div"
 
 
