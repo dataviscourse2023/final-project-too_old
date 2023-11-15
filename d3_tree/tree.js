@@ -96,6 +96,18 @@ function update(source) {
         .attr("text-anchor", d => d.children || d._children ? "end" : "start")
         .text(d => d.data.name);
 
+    // Add background for node text
+    function getBB(selection) {
+        selection.each(function(d){d.bbox = this.getBBox();})
+    }
+
+    nodeEnter.call(getBB).insert("rect", "text")
+        .attr("x", function(d){return d.bbox.x})
+        .attr("y", function(d){return d.bbox.y})
+        .attr("width", function(d){return d.bbox.width})
+        .attr("height", function(d){return d.bbox.height})
+        .style("fill", "var(--color-black-4)");
+
     // UPDATE
     let nodeUpdate = nodeEnter.merge(node);
 
