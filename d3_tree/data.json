@@ -1,6 +1,6 @@
 {
   "name": "Nebula",
-  "image": "nebula.jpg",
+  "image": "low-mass.jpg",
   "source": "https://chandra.si.edu/photo/2005/orion/",
   "children": [
     {
@@ -9,15 +9,15 @@
       "children": [
         {
           "name": "Red Giant",
-          "image": "",
+          "image": "low-mass.jpg",
           "children": [
             {
               "name": "Planetary Nebula",
-              "image": "",
+              "image": "low-mass.jpg",
               "children": [
                 {
                   "name": "White Dwarf",
-                  "image": "",
+                  "image": "low-mass.jpg",
                   "children": [
                   ]
                 }
@@ -29,25 +29,25 @@
     },
     {
       "name": "High-Mass Main Sequence",
-      "image": "high-mass.jpg",
+      "image": "low-mass.jpg",
       "children": [
         {
           "name": "Red Supergiant",
-          "image": "",
+          "image": "low-mass.jpg",
           "children": [
             {
               "name": "Supernova",
-              "image": "",
+              "image": "low-mass.jpg",
               "children": [
                 {
                   "name": "Neutron Star",
-                  "image": "",
+                  "image": "low-mass.jpg",
                   "children": [
                   ]
                 },
                 {
                   "name": "Black Hole",
-                  "image": "",
+                  "image": "low-mass.jpg",
                   "children": [
                   ]
                 }

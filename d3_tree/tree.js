@@ -8,14 +8,14 @@
 const CHART_HEIGHT = 600
 const CHART_WIDTH = 1200
 const DIV_ID = "#tree-div"
-const CIRCLE_RADIUS = 45
+const CIRCLE_RADIUS = 30
 
 
 // Declare initial objects
 let treeData = await d3.json("d3_tree/data.json");
 
 // Set the dimensions and margins of the diagram
-let margin  = {top: 20, right: 90, bottom: 30, left: 90};
+let margin  = {top: 20, right: 90, bottom: 30, left: 200};
 let width   = CHART_WIDTH - margin.left - margin.right;
 let height  = CHART_HEIGHT - margin.top - margin.bottom;
 
@@ -93,20 +93,10 @@ function update(source) {
     // Add labels for the nodes
     nodeEnter.append('text')
         .attr("dy", ".35em")
-        .attr("x", d => d.children || d._children ? -13 : 13)
-        .attr("text-anchor", d => d.children || d._children ? "end" : "start")
+        .attr("transform", "translate(" + 0 + "," + (CIRCLE_RADIUS + 10) + ")" )
+        .attr("text-anchor", "middle")
+        .attr("fill", "var(--color-black-4)")
         .text(d => d.data.name);
-
-    // Add background for node text
-    function getBB(selection) {
-        selection.each(function(d){d.bbox = this.getBBox();})
-    }
-    nodeEnter.call(getBB).insert("rect", "text")
-        .attr("x", function(d){return d.bbox.x})
-        .attr("y", function(d){return d.bbox.y})
-        .attr("width", function(d){return d.bbox.width})
-        .attr("height", function(d){return d.bbox.height})
-        .style("fill", "var(--color-black-4)");
 
     // Add Picture for the nodes
     // (see https://stackoverflow.com/questions/31203720/how-to-place-an-image-in-d3-node)
@@ -115,14 +105,10 @@ function update(source) {
         .attr('id', function(d){ return 'pic_' + d.data.image; })
         .attr('height',CIRCLE_RADIUS*2)
         .attr('width',CIRCLE_RADIUS*2)
-        .attr('x',0)
-        .attr('y',0)
         .append('image')
             .attr('xlink:href',function(d,i){ return './d3_tree/images/' + d.data.image; })
             .attr('height',CIRCLE_RADIUS*2)
             .attr('width',CIRCLE_RADIUS*2)
-            .attr('x',0)
-            .attr('y',0);
 
     // UPDATE
     let nodeUpdate = nodeEnter.merge(node);
