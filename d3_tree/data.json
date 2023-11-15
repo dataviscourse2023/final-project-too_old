@@ -5,7 +5,7 @@
   "children": [
     {
       "name": "Low-Mass Main Sequence",
-      "image": "",
+      "image": "low-mass.jpg",
       "children": [
         {
           "name": "Red Giant",
@@ -19,7 +19,6 @@
                   "name": "White Dwarf",
                   "image": "",
                   "children": [
-        
                   ]
                 }
               ]
@@ -30,7 +29,7 @@
     },
     {
       "name": "High-Mass Main Sequence",
-      "image": "",
+      "image": "high-mass.jpg",
       "children": [
         {
           "name": "Red Supergiant",
