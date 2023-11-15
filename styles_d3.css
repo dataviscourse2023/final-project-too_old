@@ -9,7 +9,7 @@ svg{
 .node circle {
     fill: #fff;
     stroke: steelblue;
-    stroke-width: 3px;
+    stroke-width: 1px;
 }
 
 .node text {

@@ -100,13 +100,28 @@ function update(source) {
     function getBB(selection) {
         selection.each(function(d){d.bbox = this.getBBox();})
     }
-
     nodeEnter.call(getBB).insert("rect", "text")
         .attr("x", function(d){return d.bbox.x})
         .attr("y", function(d){return d.bbox.y})
         .attr("width", function(d){return d.bbox.width})
         .attr("height", function(d){return d.bbox.height})
         .style("fill", "var(--color-black-4)");
+
+    // Add Picture for the nodes
+    // (see https://stackoverflow.com/questions/31203720/how-to-place-an-image-in-d3-node)
+    nodeEnter.append('defs')
+        .append('pattern')
+        .attr('id', function(d){ return 'pic_' + d.data.name; })
+        .attr('height',60)
+        .attr('width',60)
+        .attr('x',0)
+        .attr('y',0)
+        .append('image')
+            .attr('xlink:href',function(d,i){ return './d3_tree/images/' + d.data.image; })
+            .attr('height',60)
+            .attr('width',60)
+            .attr('x',0)
+            .attr('y',0);
 
     // UPDATE
     let nodeUpdate = nodeEnter.merge(node);
@@ -119,9 +134,9 @@ function update(source) {
     // Update the node attributes and style
     nodeUpdate.select('circle.node')
         .attr('r', 20)
-        .style("fill", d => d._children ? "lightsteelblue" : "#fff")
+        // .style("fill", d => d._children ? "lightsteelblue" : "#fff")
+        .style("fill", function(d){ return 'url(#pic_' + d.data.name +')'; })
         .attr('cursor', 'pointer');
-
 
     // Remove any exiting nodes
     let nodeExit = node.exit().transition()
