@@ -3,7 +3,7 @@ final-project-too_old created by GitHub Classroom
 
 This project is a data-visualization exercise created by Kevin Mooers and Rebecca Corely. The goal of this project is to illustrate fundamental concepts of stellar evolution. 
 To this aim, we create a webpage that hosts three visualizations: 
-| Rank | Illustration |
+|      | Illustration |
 |-----:|---------------|
 |     1|   Tree Diagram showing the possible evolutionary tracks of stellar material            |
 |     2|   Hertzsprung–Russell diagram showing how temperature and luminosity change as stars age             |
