@@ -76,3 +76,23 @@ html {
     background-color: var(--color-black-0);
 }
 
+#tree-wrapper{
+    display: flex;
+    justify-content: left;
+}
+
+#tree-graphic{
+    width: 60vw;
+    min-width: 1000px;
+    float: left;
+}
+
+#tree-toolbox {
+    height: 60vh;
+    width: 10vw;
+    min-height: 600px;
+    min-width: 200px;
+    background-color: var(--color-primary-1);
+    float: right;
+}
+

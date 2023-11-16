@@ -6,7 +6,7 @@
 
 // Script globals
 const CHART_HEIGHT = 600
-const CHART_WIDTH = 1200
+const CHART_WIDTH = 1000
 const DIV_ID = "#tree-div"
 const CIRCLE_RADIUS = 30
 
@@ -15,7 +15,7 @@ const CIRCLE_RADIUS = 30
 let treeData = await d3.json("d3_tree/data.json");
 
 // Set the dimensions and margins of the diagram
-let margin  = {top: 20, right: 90, bottom: 30, left: 200};
+let margin  = {top: 20, right: 90, bottom: 30, left: 120};
 let width   = CHART_WIDTH - margin.left - margin.right;
 let height  = CHART_HEIGHT - margin.top - margin.bottom;
 

@@ -1,59 +1,95 @@
 {
-  "name": "Nebula",
-  "image": "low-mass.jpg",
+  "name": "Molecular Cloud",
+  "image": "molecular_cloud.jpg",
   "image_source": "https://chandra.si.edu/photo/2005/orion/",
   "description": "lorem ipsum",
   "children": [
     {
-      "name": "Low-Mass Main Sequence",
-      "image": "low-mass.jpg",
+      "name": "Open Cluster",
+      "image": "open_cluster.jpg",
       "children": [
         {
-          "name": "Red Giant",
-          "image": "low-mass.jpg",
+          "name": "Massive Star",
+          "image": "massive-star.jpg",
           "children": [
             {
-              "name": "Planetary Nebula",
-              "image": "low-mass.jpg",
+              "name": "Red Supergiant",
+              "image": "red-supergiant.jpg",
               "children": [
                 {
-                  "name": "White Dwarf",
-                  "image": "low-mass.jpg",
+                  "name": "Type II Supernovae",
+                  "image": "type_ii_supernovae.jpg",
                   "children": [
+                    {
+                      "name": "Supernova remnant",
+                      "image": "supernova_remnant.jpg",
+                      "children": [
+                      ]
+                    },
+                    {
+                      "name": "Black Hole",
+                      "image": "black_hole.jpg",
+                      "children": [
+                      ]
+                    },
+                    {
+                      "name": "Neutron Star",
+                      "image": "neutron_star.jpg",
+                      "children": [
+                      ]
+                    }
                   ]
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "High-Mass Main Sequence",
-      "image": "low-mass.jpg",
-      "children": [
+        },
         {
-          "name": "Red Supergiant",
-          "image": "low-mass.jpg",
+          "name": "Low-Mass Star",
+          "image": "low-mass_star.jpg",
           "children": [
             {
-              "name": "Supernova",
-              "image": "low-mass.jpg",
+              "name": "Red Giant",
+              "image": "red_giant.jpg",
               "children": [
                 {
-                  "name": "Neutron Star",
-                  "image": "low-mass.jpg",
+                  "name": "Binary White Dwarf",
+                  "image": "binary_white_dwarf.jpg",
                   "children": [
+                    {
+                      "name": "Type 1a Supernova",
+                      "image": "type_1a_supernova.jpg",
+                      "children": [
+                      ]
+                    },
+                    {
+                      "name": "Nova",
+                      "image": "nova.jpg",
+                      "children": [
+                      ]
+                    }
                   ]
                 },
                 {
-                  "name": "Black Hole",
-                  "image": "low-mass.jpg",
+                  "name": "Planetary Nebula",
+                  "image": "planetary_nebula.jpg",
                   "children": [
+                    {
+                      "name": "white Dwarf",
+                      "image": "white_dwarf.jpg",
+                      "children": [
+                      ]
+                    }
                   ]
                 }
               ]
             }
+          ]
+        },
+        {
+          "name": "Brown Dwarf",
+          "image": "brown_dwarf.jpg",
+          "children": [
           ]
         }
       ]
