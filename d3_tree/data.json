@@ -2,36 +2,42 @@
   "name": "Molecular Cloud",
   "image": "molecular_cloud.jpeg",
   "image_source": "https://astrobites.org/2017/01/16/so-what-does-a-molecular-cloud-produce-anyway/",
-  "description": "lorem ipsum",
+  "description": "The root of the tree is the molecular cloud. They are often referred to as “stellar nurseries” because this is the birthplace of stars. These interstellar clouds of gas, dust, and plasma. Regions of molecular clouds that collapse under the force of gravity begin to produce tiny planets to giant stars. ",
   "children": [
     {
       "name": "Open Cluster",
       "image": "open_cluster.jpeg",
       "image_source": "https://www.smithsonianmag.com/smart-news/month-look-skies-pleiades-constellation-and-comet-180957327/",
+      "description": "Open cluster: The gravitational collapse of gas and dust pushes the stars to the next stage in a star’s lifetime, which occurs in an open cluster. An open cluster is a star cluster composed of tens to thousands of stars. These stars formed from the same molecular cloud and are roughly the same age. The stars here are protostars or very young stars that are still accumulating mass from the molecular cloud. Pictured here is one of the most famous open clusters: the Pleiades cluster, also known as the seven sisters.",
       "children": [
         {
           "name": "Massive Star",
           "image": "massive_star.jpeg",
           "image_source": "https://news.fit.edu/archive/update-research-massive-magnetic-stars/",
+          "description": "Massive Star (>8 solar masses (M_sun): Massive stars have masses that are greater than eight solar masses - that’s eight times more than our Sun. They are typically some of the brightest stars in the night sky. It takes a lot of energy for massive stars to burn, thus they live very fast and die hard.",
           "children": [
             {
               "name": "Red Supergiant",
               "image": "red_supergiant.jpeg",
+              "description": "Red Supergiant: Red supergiant stars are some of the largest stars in the Universe that are approaching later years in their life. Their size is hundreds to thousands of times greater than the Sun. Their red color is indicative of their cooler temperature. These stars burn heavier elements until they develop an iron core, which results in a supernova explosion.",
               "children": [
                 {
                   "name": "Type II Supernova",
                   "image": "type_ii_supernova.jpeg",
                   "image_source": "https://www.mpg.de/4628376/Furious_Finale",
+                  "description": "The death of stars with masses between 8 and ~50 solar masses result in a rapid collapse and violent explosion known as a supernova. Type II supernovae in particular are distinguished from other supernovae by their hydrogen abundance.",
                   "children": [
                     {
                       "name": "Supernova remnant",
                       "image": "supernova_remnant.jpeg",
+                      "description": "Supernova remnants (SNR) are the structures leftover from explosions of stars that result in supernovae. SNRs consist of the ejected material expanding from the explosion. They are key components to understanding the ecology of galaxies.",
                       "children": [
                       ]
                     },
                     {
                       "name": "Black Hole",
                       "image": "black_hole.jpeg",
+                      "description": "Stars >40 solar masses ->  Black Hole: A black hole is a region in space that is so dense, there is so much matter in such a small area, which causes the gravitational pull to be so strong that nothing can escape - not even light. ",
                       "children": [
                       ]
                     },
@@ -39,6 +45,7 @@
                       "name": "Neutron Star",
                       "image": "neutron_star.jpeg",
                       "image_source": "https://www.sciencenews.org/article/neutron-stars-pulsar-density-diameter-matter",
+                      "description": "Neutron stars are collapsed cores from supergiant stars. They are the result from supernova explosions combined with gravitational collapse. Aside from black holes, they are the densest known objects in our Universe. Once a star collapses into a neutron star it no longer generates heat and begins to cool over time. They typically have a radius of about 10 kilometers and mass of ~1.4 solar masses.",
                       "children": [
                       ]
                     }
@@ -51,25 +58,30 @@
         {
           "name": "Low-Mass Star",
           "image": "low-mass_star.jpeg",
+          "description": "Low mass stars are stars that are less than 8 solar masses. They spend most of their life fusing hydrogen and helium in their core, which causes them to be the longest lived energy-producing objects in the Universe. Low mass stars are the most abundant, most difficult to detect, and can live for trillions of years.",
           "children": [
             {
               "name": "Red Giant",
               "image": "red_giant.png",
               "image_source": "https://theplanets.org/types-of-stars/red-giant-star/",
+              "description": "A red giant forms after a star has run out of hydrogen fuel for nuclear fusion, and has begun the process of dying. The atmosphere is inflated making the radius large but the temperature low.",
               "children": [
                 {
                   "name": "Binary White Dwarf",
                   "image": "binary_white_dwarf.jpeg",
+                  "description": "White dwarf binary stars are extreme systems that radiate gravitational waves as they orbit each other. To balance the loss of this energy, the stars gradually come closer together until eventually they merge. Many white dwarf binaries will explode as supernovae when they merge, but this newly discovered one is too small to trigger such an explosion. Instead, it will probably start fusing its helium atoms, and when it does - in about 37 million years - it will shine like a normal star again. ",
                   "children": [
                     {
                       "name": "Type 1a Supernova",
                       "image": "type_1a_supernova.jpeg",
+                      "description": "Stars >1.4 solar masses: Type Ia Supernova is a type of supernova that occurs in binary systems (two stars orbiting one another) in which one of the stars is a white dwarf. The other star can be anything from a giant star to an even smaller white dwarf.",
                       "children": [
                       ]
                     },
                     {
                       "name": "Nova",
                       "image": "nova.jpeg",
+                      "description": "Stars <1.4 solar masses: Nova an explosion from the surface of a white-dwarf star in a binary star system. A nova occurs when the white dwarf, which is the dense core of a once-normal star, steals gas from its nearby companion star. When enough gas builds up on the surface of the white dwarf it triggers an explosion.",
                       "children": [
                       ]
                     }
@@ -78,10 +90,12 @@
                 {
                   "name": "Planetary Nebula",
                   "image": "planetary_nebula.jpeg",
+                  "description": "Planetary Nebula is a type of emission nebula consisting of an expanding, glowing shell of ionized gas ejected from red giant stars late in their lives. The term 'planetary nebula' is a misnomer because they are unrelated to planets. All planetary nebulae form at the end of the life of a star of intermediate mass, about 1-8 solar masses. It is expected that the Sun will form a planetary nebula at the end of its life cycle. They are relatively short-lived phenomena, lasting perhaps a few tens of millennia, compared to considerably longer phases of stellar evolution.                   ",
                   "children": [
                     {
                       "name": "white Dwarf",
                       "image": "white_dwarf.jpeg",
+                      "description": "White dwarf is what stars like the Sun become after they have exhausted their nuclear fuel. Near the end of its nuclear burning stage, this type of star expels most of its outer material, creating a planetary nebula. Only the hot core of the star remains.",
                       "children": [
                       ]
                     }
@@ -94,6 +108,7 @@
         {
           "name": "Brown Dwarf",
           "image": "brown_dwarf.png",
+          "description":"Brown Dwarf (<0.08 solar masses): (also called failed stars) are substellar objects that, while more massive than the most massive gas giant planets, are (unlike a main-sequence star), not massive enough to sustain nuclear fusion of ordinary hydrogen into helium in their cores.",
           "children": [
           ]
         }
