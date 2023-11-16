@@ -1,40 +1,44 @@
 {
   "name": "Molecular Cloud",
-  "image": "molecular_cloud.jpg",
-  "image_source": "https://chandra.si.edu/photo/2005/orion/",
+  "image": "molecular_cloud.jpeg",
+  "image_source": "https://astrobites.org/2017/01/16/so-what-does-a-molecular-cloud-produce-anyway/",
   "description": "lorem ipsum",
   "children": [
     {
       "name": "Open Cluster",
-      "image": "open_cluster.jpg",
+      "image": "open_cluster.jpeg",
+      "image_source": "https://www.smithsonianmag.com/smart-news/month-look-skies-pleiades-constellation-and-comet-180957327/",
       "children": [
         {
           "name": "Massive Star",
-          "image": "massive_star.jpg",
+          "image": "massive_star.jpeg",
+          "image_source": "https://news.fit.edu/archive/update-research-massive-magnetic-stars/",
           "children": [
             {
               "name": "Red Supergiant",
-              "image": "red_supergiant.jpg",
+              "image": "red_supergiant.jpeg",
               "children": [
                 {
-                  "name": "Type II Supernovae",
-                  "image": "type_ii_supernovae.jpg",
+                  "name": "Type II Supernova",
+                  "image": "type_ii_supernova.jpeg",
+                  "image_source": "https://www.mpg.de/4628376/Furious_Finale",
                   "children": [
                     {
                       "name": "Supernova remnant",
-                      "image": "supernova_remnant.jpg",
+                      "image": "supernova_remnant.jpeg",
                       "children": [
                       ]
                     },
                     {
                       "name": "Black Hole",
-                      "image": "black_hole.jpg",
+                      "image": "black_hole.jpeg",
                       "children": [
                       ]
                     },
                     {
                       "name": "Neutron Star",
-                      "image": "neutron_star.jpg",
+                      "image": "neutron_star.jpeg",
+                      "image_source": "https://www.sciencenews.org/article/neutron-stars-pulsar-density-diameter-matter",
                       "children": [
                       ]
                     }
@@ -46,25 +50,26 @@
         },
         {
           "name": "Low-Mass Star",
-          "image": "low-mass_star.jpg",
+          "image": "low-mass_star.jpeg",
           "children": [
             {
               "name": "Red Giant",
-              "image": "red_giant.jpg",
+              "image": "red_giant.png",
+              "image_source": "https://theplanets.org/types-of-stars/red-giant-star/",
               "children": [
                 {
                   "name": "Binary White Dwarf",
-                  "image": "binary_white_dwarf.jpg",
+                  "image": "binary_white_dwarf.jpeg",
                   "children": [
                     {
                       "name": "Type 1a Supernova",
-                      "image": "type_1a_supernova.jpg",
+                      "image": "type_1a_supernova.jpeg",
                       "children": [
                       ]
                     },
                     {
                       "name": "Nova",
-                      "image": "nova.jpg",
+                      "image": "nova.jpeg",
                       "children": [
                       ]
                     }
@@ -72,11 +77,11 @@
                 },
                 {
                   "name": "Planetary Nebula",
-                  "image": "planetary_nebula.jpg",
+                  "image": "planetary_nebula.jpeg",
                   "children": [
                     {
                       "name": "white Dwarf",
-                      "image": "white_dwarf.jpg",
+                      "image": "white_dwarf.jpeg",
                       "children": [
                       ]
                     }
@@ -88,7 +93,7 @@
         },
         {
           "name": "Brown Dwarf",
-          "image": "brown_dwarf.jpg",
+          "image": "brown_dwarf.png",
           "children": [
           ]
         }
