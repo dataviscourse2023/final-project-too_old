@@ -10,11 +10,11 @@
       "children": [
         {
           "name": "Massive Star",
-          "image": "massive-star.jpg",
+          "image": "massive_star.jpg",
           "children": [
             {
               "name": "Red Supergiant",
-              "image": "red-supergiant.jpg",
+              "image": "red_supergiant.jpg",
               "children": [
                 {
                   "name": "Type II Supernovae",
