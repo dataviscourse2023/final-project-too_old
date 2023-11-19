@@ -6,7 +6,7 @@
 
 // Script globals
 const CHART_HEIGHT = 600
-const CHART_WIDTH = 1000
+const CHART_WIDTH = 1200
 const DIV_ID = "#tree-div"
 const CIRCLE_RADIUS = 30
 
@@ -23,8 +23,8 @@ let height  = CHART_HEIGHT - margin.top - margin.bottom;
 // appends a 'group' element to 'svg'
 // moves the 'group' element to the top left margin
 let svg = d3.select(DIV_ID).append("svg")
-    .attr("width", width + margin.right + margin.left)
-    .attr("height", height + margin.top + margin.bottom)
+    .style("width", width + margin.right + margin.left + "px")
+    .style("height", height + margin.top + margin.bottom + "px")
     .append("g")
     .attr("transform", "translate("
             + margin.left + "," + margin.top + ")");

@@ -72,7 +72,7 @@ html {
     height: 60vh;
     width: 70vw;
     min-height: 600px;
-    min-width: 1200px;
+    min-width: 600px;
     background-color: var(--color-black-0);
 }
 
@@ -85,7 +85,7 @@ html {
     flex: 2;
 }
 
-#tree-toolbox {
+.toolbox {
     flex: 1 200px;
     background-color: var(--color-primary-1);
 }

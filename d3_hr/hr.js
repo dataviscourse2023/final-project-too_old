@@ -12,7 +12,11 @@ init();
  */
 function init () {
   //set up initial chart spaces
-  let hrScatterPlot = d3.select("#hr-div").append("svg").attr("class","scatter-plot").attr("id", "hr");
+  let hrScatterPlot = d3.select("#hr-div").append("svg")
+    .style("width", CHART_WIDTH + "px")
+    .style("height", CHART_HEIGHT + "px")
+    .attr("class","scatter-plot")
+    .attr("id", "hr")
   console.log(hrScatterPlot);
 
   for(let chart of [hrScatterPlot]){

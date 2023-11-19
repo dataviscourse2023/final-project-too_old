@@ -1,14 +1,10 @@
 /* d3 elements */
 svg{
-    width: 1200px;
-    height: 600px;
     color: var(--color-black-4);
 }
 
 /* tree elements */
 .node circle {
-    /* fill: #fff; */
-    /* stroke: steelblue; */
     stroke-width: 1px;
 }
 
