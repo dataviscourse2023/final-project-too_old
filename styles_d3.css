@@ -1,6 +1,6 @@
 /* d3 elements */
 svg{
-    color: var(--color-black-4);
+    color: var(--color-text-white);
 }
 
 /* tree elements */
@@ -21,9 +21,9 @@ svg{
 
 /* scatter plot elements */
 .scatter-plot circle {
-    fill: var(--color-secondary-2-1);
+    fill: var(--color-white);
 }
 
 .scatter-plot .hovered {
-    fill: var(--color-complement-0);
+    fill: var(--color-tertiary);
 }
