@@ -16,7 +16,7 @@ const CIRCLE_RADIUS = 30
 let treeData = await d3.json("d3_tree/data.json");
 
 // Set the dimensions and margins of the diagram
-let margin  = {top: 20, right: 90, bottom: 30, left: 120};
+let margin  = {top: 10, right: 90, bottom: 10, left: 90};
 let width   = CHART_WIDTH - margin.left - margin.right;
 let height  = CHART_HEIGHT - margin.top - margin.bottom;
 
@@ -97,7 +97,6 @@ function update(source) {
         .attr("dy", ".35em")
         .attr("transform", "translate(" + 0 + "," + (CIRCLE_RADIUS + 10) + ")" )
         .attr("text-anchor", "middle")
-        .attr("fill", "var(--color-black-4)")
         .text(d => d.data.name);
 
     // Add Picture for the nodes

@@ -1,6 +1,7 @@
 html {
     height: 3140px;
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    color: var(--color-text);
 }
 
 .foreground{
@@ -58,35 +59,45 @@ html {
 }
 
 .wrapper {
-    background-color: transparent;
-    border: 3px solid var(--color-black-4);
+    min-height: 700px;
+    min-width: 1000px;
+    background-color: transparent;    
+    border: 3px solid var(--color-primary);
+    border-radius: 5px;
 }
 
 .textbox{
     height: 10vh;
-    padding: 10px;
-    background-color: var(--color-black-4);
+    min-height: 100px;
+    padding: 20px;
+    background-color: var(--color-white);
+    border: 3px solid var(--color-primary);
+    font: 16px sans-serif;
 }
 
 .flex_wrapper {
     height: 60vh;
     width: 70vw;
     min-height: 600px;
-    min-width: 600px;
+    min-width: 1000px;
     display: flex;
     justify-content: left;
+}
+
+.toolbox {
+    width: 300px;
+    padding: 20px;
+    background-color: var(--color-white);
+    border: 3px solid var(--color-primary);
+    font: 16px sans-serif;
 }
 
 .graphic {
     height: 60vh;
     width: 70vw;
     min-height: 600px;
-    min-width: 600px;
-    background-color: var(--color-black-0);
-}
-
-.toolbox {
-    width: 300px;
-    background-color: var(--color-primary-1);
+    min-width: 1000px;
+    color: var(--color-white);
+    background-color: var(--color-black);
 }
 
