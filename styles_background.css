@@ -1,3 +1,6 @@
+/* adaption of the animated background created here: https://github.com/WebDevSHORTS/Parallax-Star-Background */ 
+/* rather than animating this, we decided to use the rellax library to create a parallax effect on scroll */
+
 #starWrapper{
     overflow: hidden;
     height: 300vh;
