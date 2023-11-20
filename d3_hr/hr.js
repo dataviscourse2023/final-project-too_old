@@ -2,7 +2,7 @@
 const CHART_HEIGHT = 600
 const CHART_WIDTH = 1000
 const DIV_ID = "#hr-div"
-const sourceFile = "./d3_hr/isochrone.csv"
+const sourceFile = "./d3_hr/isochrones.csv"
 
 // call init on load
 init();
@@ -39,11 +39,11 @@ function loadData (source) {
     .then(dataOutput => {
       /*data wrangling*/
       const data = dataOutput.map((d) => ({
-        logAge: parseInt(d.logAge), 
+        Age: parseInt(d.Age),
         mass: parseFloat(d.Mass),
         logL: parseFloat(d.logL),
         logTe: parseFloat(d.logTe),
-        Gmag: parseFloat(d.Gmag)
+        // Gmag: parseFloat(d.Gmag)
       }));
         console.log(data)
         update(data);
@@ -69,6 +69,7 @@ function updateScatterPlot (data, svg) {
   // Declare which columns we will be using for x and y columns
   const xColumn = "logTe"
   const yColumn = "logL" 
+  const zColumn = "Age"
 
   // Declare the chart dimensions and margins.
   const width = CHART_WIDTH;
@@ -95,7 +96,7 @@ function updateScatterPlot (data, svg) {
     .range([marginLeft, width - marginRight])
   
   // Declare the y (vertical position) scale.
-  let ybuffer = 1;
+  let ybuffer = 2;
   const y = d3.scaleLinear()
     .domain([d3.min(data, (d) => d[yColumn]) - ybuffer, d3.max(data, (d) => d[yColumn]) + ybuffer])
     .range([height - marginBottom, marginTop])
@@ -103,6 +104,11 @@ function updateScatterPlot (data, svg) {
   const yTicks = y.ticks()
     .filter(tick => Number.isInteger(tick))
 
+  // Declare the z (dot color) scale.
+  const z = d3.scaleLinear()
+    .domain(d3.extent(data, (d) => d[zColumn]))
+    .range(['pink','blue'])
+    .clamp(true)
 
   // ****************** Dots section ***************************
 
@@ -112,8 +118,9 @@ function updateScatterPlot (data, svg) {
 
   // ENTER dots
   let dotsEnter = dots.enter().append("circle")
+    .attr("fill", d => z(d[zColumn]))
 
-  // Add mouseover and onclick events. Why does this only work after changing the data?
+  // Add mouseover and onclick events
   dotsEnter.on('mouseover', function (event, d) {
       d3.select(this).transition()
         .duration('50')

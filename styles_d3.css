@@ -20,10 +20,6 @@ svg{
 }
 
 /* scatter plot elements */
-.scatter-plot circle {
-    fill: var(--color-white);
-}
-
 .scatter-plot .hovered {
     fill: var(--color-tertiary);
 }
