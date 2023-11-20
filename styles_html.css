@@ -66,16 +66,31 @@ html {
     border-radius: 5px;
 }
 
-.textbox{
+.titlebox_wrapper {
     height: 10vh;
     min-height: 100px;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
     background-color: var(--color-white);
     border: 3px solid var(--color-primary);
     font: 16px sans-serif;
 }
 
-.flex_wrapper {
+.titlebox {
+    color: var(--color-text-white);
+    background-color: var(--color-base);
+    text-align: center;
+    font: 22px sans-serif;
+    padding: 10px;
+}
+
+.textbox{
+    background-color: var(--color-white);
+    font: 16px sans-serif;
+    padding: 15px;
+}
+
+.graphic_wrapper {
     height: 60vh;
     width: 70vw;
     min-height: 600px;
@@ -89,6 +104,7 @@ html {
     padding: 20px;
     background-color: var(--color-white);
     border: 3px solid var(--color-primary);
+    border-top: none;
     font: 16px sans-serif;
 }
 
