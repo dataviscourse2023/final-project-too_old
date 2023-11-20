@@ -6,7 +6,7 @@
 
 // Script globals
 const CHART_HEIGHT = 600
-const CHART_WIDTH = 1200
+const CHART_WIDTH = 1100
 const DIV_ID = "#tree-div"
 const TOOLBOX_ID = "#tree-toolbox"
 const CIRCLE_RADIUS = 30

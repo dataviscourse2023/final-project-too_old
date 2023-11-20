@@ -39,7 +39,7 @@ html {
 }
 
 #title span {
-    background: -webkit-linear-gradient(var(--color-white), var(--color-gray-dark));
+    background: -webkit-linear-gradient(var(--color-white), var(--color-gray-light));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
