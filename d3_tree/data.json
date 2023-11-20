@@ -14,7 +14,7 @@
           "name": "Massive Star",
           "image": "massive_star.jpeg",
           "image_source": "https://news.fit.edu/archive/update-research-massive-magnetic-stars/",
-          "description": "<b>Massive star:</b> These stars have masses that are greater than eight solar masses - that’s eight times more than our Sun. They are typically some of the brightest stars in the night sky. It takes a lot of energy for massive stars to burn, so they live very fast and die hard.",
+          "description": "<b>Massive star:</b> Stars of >8 solar masses  - that’s eight times more than our Sun. They are typically some of the brightest stars in the night sky. It takes a lot of energy for massive stars to burn, so they live very fast and die hard.",
           "children": [
             {
               "name": "Red Supergiant",
@@ -58,7 +58,7 @@
         {
           "name": "Low-Mass Star",
           "image": "low-mass_star.jpeg",
-          "description": "<b>Low mass stars:</b> stars that are less than 8 solar masses. They spend most of their life fusing hydrogen and helium in their core, which causes them to be the longest lived energy-producing objects in the Universe. Low mass stars are the most abundant, most difficult to detect, and can live for trillions of years.",
+          "description": "<b>Low mass stars:</b> Stars of <8 solar masses spend most of their life fusing hydrogen and helium in their core, which causes them to be the longest lived energy-producing objects in the Universe. Low mass stars are the most abundant, most difficult to detect, and can live for trillions of years.",
           "children": [
             {
               "name": "Red Giant",
