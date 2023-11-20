@@ -128,7 +128,8 @@ function update(source) {
 
     // Add mouseover handler
     nodeUpdate.on("mouseover", function(event, d){
-            d3.select(TOOLBOX_ID).text(d.data.description);
+            let mouseoverText = d.data.description;
+            d3.select(TOOLBOX_ID).html(mouseoverText);
         })
 
     // Remove any exiting nodes
