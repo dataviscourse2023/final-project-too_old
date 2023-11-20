@@ -31,7 +31,8 @@ function init () {
 }
 
 /**
- * Update the data according to document settings
+ * Fetch the data according to document settings
+ * Then call update(data) to render the chart
  */
 function loadData (source) {
   d3.csv(source)
@@ -72,10 +73,10 @@ function updateScatterPlot (data, svg) {
   // Declare the chart dimensions and margins.
   const width = CHART_WIDTH;
   const height = CHART_HEIGHT;
-  const marginTop = 30;
+  const marginTop = 60;
   const marginRight = 30;
-  const marginBottom = 30;
-  const marginLeft = 60;
+  const marginBottom = 60;
+  const marginLeft = 90;
 
   // Declare the x (horizontal position) scale.
   //NOTE: SCALE IS BACKWARDS FOR TEMPERATURE
@@ -147,4 +148,21 @@ function updateScatterPlot (data, svg) {
     .transition()
       .attr("transform", `translate(${marginLeft},0)`)
       .call(d3.axisLeft(y).tickValues(yTicks))
+
+  // Add the X Axis label
+  var xAxisLabel = svg.append("text")
+      .attr("class", "x label")
+      .attr("text-anchor", "middle")
+      .attr("x", width / 2)
+      .attr("y", height - marginBottom / 2 + 10)
+      .text("Temperature (UNITS)");
+
+  // Add the Y Axis Label
+  var yAxisLabel = svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "middle")
+    .attr("x", - height / 2)
+    .attr("y", marginTop - 10)
+    .attr("transform", "rotate(-90)")
+    .text("Luminosity (UNITS)");
 }
