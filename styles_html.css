@@ -62,7 +62,7 @@ html {
     min-height: 700px;
     min-width: 1000px;
     background-color: transparent;    
-    border: 3px solid var(--color-primary);
+    border: 3px solid var(--color-primary-darker);
     border-radius: 5px;
 }
 
@@ -72,7 +72,7 @@ html {
     display: flex;
     flex-direction: column;
     background-color: var(--color-white);
-    border: 3px solid var(--color-primary);
+    border: 3px solid var(--color-primary-darker);
     font: 16px sans-serif;
 }
 
@@ -103,7 +103,7 @@ html {
     width: 300px;
     padding: 20px;
     background-color: var(--color-white);
-    border: 3px solid var(--color-primary);
+    border: 3px solid var(--color-primary-darker);
     border-top: none;
     font: 16px sans-serif;
 }
