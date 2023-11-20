@@ -103,24 +103,18 @@ function updateScatterPlot (data, svg) {
   const yTicks = y.ticks()
     .filter(tick => Number.isInteger(tick))
 
-  //add dots
-  var dots = svg.selectAll("circle")
+
+  // ****************** Dots section ***************************
+
+  // add dots
+  let dots = svg.selectAll("circle")
     .data(data);
 
-  //remove existing dots. This is needed if the dataset size changes
-  dots.exit()
-    .remove(); 
- 
-  //Add new dots and merge them
-  dots.enter().append("circle")
-    .merge(dots) 
-    .transition()
-      .attr("cx", (d) => x(d[xColumn]))
-      .attr("cy", (d) => y(d[yColumn]))
-      .attr("r", 2);
+  // ENTER dots
+  let dotsEnter = dots.enter().append("circle")
 
-  //Add mouseover and onclick events. Why does this only work after changing the data?
-  dots.on('mouseover', function (event, d) {
+  // Add mouseover and onclick events. Why does this only work after changing the data?
+  dotsEnter.on('mouseover', function (event, d) {
       d3.select(this).transition()
         .duration('50')
         .attr("class", "hovered")
@@ -133,9 +127,22 @@ function updateScatterPlot (data, svg) {
         .attr('opacity', '1');
     })
 
-  dots.on("click", function(event, d){
+  dotsEnter.on("click", function(event, d){
     console.log("x: " + d[xColumn] + ", y: " + d[yColumn])
     })
+
+  // MERGE dots
+  let dotsMerge = dotsEnter.merge(dots) 
+    .transition()
+      .attr("cx", (d) => x(d[xColumn]))
+      .attr("cy", (d) => y(d[yColumn]))
+      .attr("r", 2);
+
+  // EXIT dots
+  let dotsExit = dots.exit()
+    .remove(); 
+
+  // ****************** Axes section ***************************
 
   // Update the X Axis
   var xAxis = svg.selectAll("g.xAxis")
