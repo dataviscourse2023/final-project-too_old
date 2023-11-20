@@ -68,6 +68,15 @@ html {
     background-color: var(--color-black-4);
 }
 
+.flex_wrapper {
+    height: 60vh;
+    width: 70vw;
+    min-height: 600px;
+    min-width: 600px;
+    display: flex;
+    justify-content: left;
+}
+
 .graphic {
     height: 60vh;
     width: 70vw;
@@ -76,17 +85,8 @@ html {
     background-color: var(--color-black-0);
 }
 
-.flex_wrapper {
-    display: flex;
-    justify-content: left;
-}
-
-#tree-div{
-    flex: 2;
-}
-
 .toolbox {
-    flex: 1 200px;
+    width: 300px;
     background-color: var(--color-primary-1);
 }
 
