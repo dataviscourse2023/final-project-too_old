@@ -1,7 +1,7 @@
 html {
     height: 3140px;
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-    color: var(--color-text);
+    color: var(--color-text-base);
 }
 
 .foreground{
@@ -39,7 +39,7 @@ html {
 }
 
 #title span {
-    background: -webkit-linear-gradient(white, #38495a);
+    background: -webkit-linear-gradient(var(--color-white), var(--color-gray-dark));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -97,7 +97,7 @@ html {
     width: 70vw;
     min-height: 600px;
     min-width: 1000px;
-    color: var(--color-white);
+    color: var(--color-text-white);
     background-color: var(--color-black);
 }
 
