@@ -126,8 +126,10 @@ function update(source) {
         .style("fill", function(d){ return 'url(#pic_' + d.data.image +')'; })
         .attr('cursor', 'pointer');
 
-    // Add mouseover handlers
-    nodeUpdate.on("mouseover", mouseover);
+    // Add mouseover handler
+    nodeUpdate.on("mouseover", function(event, d){
+            d3.select(TOOLBOX_ID).text(d.data.description);
+        })
 
     // Remove any exiting nodes
     let nodeExit = node.exit().transition()
@@ -200,13 +202,4 @@ function update(source) {
             }
         update(d);
     }
-}
-
-// Add mouseover handling for intiial nodes (handling for new nodes is specified in the update function)
-d3.selectAll("g.node")
-    .on("mouseover", mouseover)
-
-// Mouseover events
-function mouseover(event, d){
-    d3.select(TOOLBOX_ID).text(d.data.description);
 }
