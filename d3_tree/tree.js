@@ -129,6 +129,13 @@ function update(source) {
     // Add mouseover handler
     nodeUpdate.on("mouseover", function(event, d){
             let mouseoverText = d.data.description;
+            if (d.children) {
+                    mouseoverText = mouseoverText + "<br><br>Click again on <b>" + d.data.name + "</b> to hide subsequent events."
+                } else if (d._children) {
+                    mouseoverText = mouseoverText + "<br><br>Click on <b>" + d.data.name + "</b> to see what can happen!"
+                } else {
+                    mouseoverText = mouseoverText
+                }
             d3.select(TOOLBOX_ID).html(mouseoverText);
         })
 
