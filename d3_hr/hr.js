@@ -105,28 +105,14 @@ function updateScatterPlot (data, svg) {
     .filter(tick => Number.isInteger(tick))
 
   // Declare the z (dot color) scale.
-  const z = d3.scaleLinear()
+  // const z = d3.scaleLinear()
+  //   .domain(d3.extent(data, (d) => d[zColumn]))
+  //   .range(['blue','red'])
+  //   .clamp(true)
+  const z = d3.scaleSequential()
     .domain(d3.extent(data, (d) => d[zColumn]))
-    .range(['pink','blue'])
-    .clamp(true)
+    .interpolator(d3.interpolateReds)
 
-  // const z = d3.scaleOrdinal()
-  //   .domain([data.Age])
-  //   .range(['pink', 'blue', 'red', 'orange', 'green'])
-  
-  
-
-    var uniqueAges = data.reduce((p,c,i,a) => {
-        if(!p[0][c.Age]) {
-            p[1].push(p[0][c.Age] = c.Age);
-        }
-        if(i<a.length-1) {
-            return p
-        } else {
-            return p[1]
-        }
-      }, [{},[]])
-    console.log(uniqueAges)
 
   // ****************** Dots section ***************************
 
