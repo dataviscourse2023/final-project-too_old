@@ -17,4 +17,9 @@
     --color-base:               #212121;
     --color-gray-dark:          #323a45;
     --color-gray-light:         #aeb0b5;
+
+    --color-gold:               #ff9d1e;
+    --color-gold-light:         #f9aa43;
+    --color-gold-lighter:       #ffc375;
+    --color-gold-lightest:      #ffebd1;
 }

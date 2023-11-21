@@ -39,7 +39,7 @@ function loadData (source) {
     .then(dataOutput => {
       /*data wrangling*/
       const data = dataOutput.map((d) => ({
-        Age: parseInt(d.Age),
+        Age: parseFloat(d.Age),
         mass: parseFloat(d.Mass),
         logL: parseFloat(d.logL),
         logTe: parseFloat(d.logTe),
@@ -109,6 +109,24 @@ function updateScatterPlot (data, svg) {
     .domain(d3.extent(data, (d) => d[zColumn]))
     .range(['pink','blue'])
     .clamp(true)
+
+  // const z = d3.scaleOrdinal()
+  //   .domain([data.Age])
+  //   .range(['pink', 'blue', 'red', 'orange', 'green'])
+  
+  
+
+    var uniqueAges = data.reduce((p,c,i,a) => {
+        if(!p[0][c.Age]) {
+            p[1].push(p[0][c.Age] = c.Age);
+        }
+        if(i<a.length-1) {
+            return p
+        } else {
+            return p[1]
+        }
+      }, [{},[]])
+    console.log(uniqueAges)
 
   // ****************** Dots section ***************************
 
