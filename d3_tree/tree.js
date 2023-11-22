@@ -135,21 +135,21 @@ function update(source) {
                 "</div>" +
                 "<span><br>"+d.data.description+"</span>";
             
-            // Suffix boilerplate language
-            let suffixHide = "<span><br><br>Click again on <b>" + d.data.name + "</b> to hide subsequent events.</span>"
-            let suffixReveal = "<span><br><br>Click on <b>" + d.data.name + "</b> to see what can happen!</span>"
+            // Footnote boilerplate language
+            let footnoteHide = "<span><br><br>Click again on <b>" + d.data.name + "</b> to hide subsequent events.</span>"
+            let footnoteReveal = "<span><br><br>Click on <b>" + d.data.name + "</b> to see what can happen!</span>"
 
             // Update the toolbox html elements
             // Add footnotes based on the node child status
-            let mouseoverText;
+            let toolboxContents;
             if (d.children) {
-                    mouseoverText = toolboxHTML + suffixHide
+                    toolboxContents = toolboxHTML + footnoteHide
                 } else if (d._children) {
-                    mouseoverText = toolboxHTML + suffixReveal
+                    toolboxContents = toolboxHTML + footnoteReveal
                 } else {
-                    mouseoverText = toolboxHTML //case where we are at a leaf node
+                    toolboxContents = toolboxHTML //case where we are at a leaf node
                 }
-            d3.select(TOOLBOX_ID).html(mouseoverText);
+            d3.select(TOOLBOX_ID).html(toolboxContents);
         })
 
     // Remove any exiting nodes
