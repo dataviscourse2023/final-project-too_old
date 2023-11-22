@@ -127,11 +127,18 @@ function update(source) {
 
     // Add mouseover handler
     nodeUpdate.on("mouseover", function(event, d){
-            let mouseoverText = d.data.description;
+            let imgSrc = "'./d3_tree/images/" + d.data.image + "'";
+            let mouseoverText = 
+                "<div style='width:240px;height:160px;position:relative;overflow:hidden;'>"+
+                "<img src="+imgSrc+" style='position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;width:100%;' />"+
+                "</div>" +
+                "<span><br>"+d.data.description+"</span>";
+            
+            // Add conditions based on if the node has children
             if (d.children) {
-                    mouseoverText = mouseoverText + "<br><br>Click again on <b>" + d.data.name + "</b> to hide subsequent events."
+                    mouseoverText = mouseoverText + "<span><br><br>Click again on <b>" + d.data.name + "</b> to hide subsequent events.</span>"
                 } else if (d._children) {
-                    mouseoverText = mouseoverText + "<br><br>Click on <b>" + d.data.name + "</b> to see what can happen!"
+                    mouseoverText = mouseoverText + "<span><br><br>Click on <b>" + d.data.name + "</b> to see what can happen!</span>"
                 } else {
                     mouseoverText = mouseoverText
                 }
