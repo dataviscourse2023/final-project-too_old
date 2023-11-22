@@ -127,20 +127,27 @@ function update(source) {
 
     // Add mouseover handler
     nodeUpdate.on("mouseover", function(event, d){
+            // Fetch node image and prepare the image+description html elements
             let imgSrc = "'./d3_tree/images/" + d.data.image + "'";
-            let mouseoverText = 
+            let toolboxHTML = 
                 "<div style='width:240px;height:160px;position:relative;overflow:hidden;'>"+
                 "<img src="+imgSrc+" style='position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;width:100%;' />"+
                 "</div>" +
                 "<span><br>"+d.data.description+"</span>";
             
-            // Add conditions based on if the node has children
+            // Suffix boilerplate language
+            let suffixHide = "<span><br><br>Click again on <b>" + d.data.name + "</b> to hide subsequent events.</span>"
+            let suffixReveal = "<span><br><br>Click on <b>" + d.data.name + "</b> to see what can happen!</span>"
+
+            // Update the toolbox html elements
+            // Add footnotes based on the node child status
+            let mouseoverText;
             if (d.children) {
-                    mouseoverText = mouseoverText + "<span><br><br>Click again on <b>" + d.data.name + "</b> to hide subsequent events.</span>"
+                    mouseoverText = toolboxHTML + suffixHide
                 } else if (d._children) {
-                    mouseoverText = mouseoverText + "<span><br><br>Click on <b>" + d.data.name + "</b> to see what can happen!</span>"
+                    mouseoverText = toolboxHTML + suffixReveal
                 } else {
-                    mouseoverText = mouseoverText
+                    mouseoverText = toolboxHTML //case where we are at a leaf node
                 }
             d3.select(TOOLBOX_ID).html(mouseoverText);
         })
