@@ -77,7 +77,7 @@ function updateScatterPlot (data, svg) {
   const height = CHART_HEIGHT;
   const marginTop = 60;
   const marginRight = 30;
-  const marginBottom = 60;
+  const marginBottom = 45;
   const marginLeft = 90;
 
   // Declare the x (horizontal position) scale.
@@ -181,7 +181,7 @@ function updateScatterPlot (data, svg) {
       .attr("class", "x label")
       .attr("text-anchor", "middle")
       .attr("x", width / 2)
-      .attr("y", height - marginBottom / 2 + 10)
+      .attr("y", height - marginBottom / 2 + 15)
       .text("Temperature (UNITS)");
 
   // Add the Y Axis Label
