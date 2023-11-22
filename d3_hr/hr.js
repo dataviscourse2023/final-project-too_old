@@ -1,6 +1,6 @@
 // Script globals
 const CHART_HEIGHT = 600
-const CHART_WIDTH = 1000
+const CHART_WIDTH = 1100
 const DIV_ID = "#hr-div"
 const TOOLBOX_ID = "#hr-toolbox"
 const sourceFile = "./d3_hr/isochrones.csv"
@@ -144,7 +144,7 @@ function updateScatterPlot (data, svg) {
         .attr("class", null)
         .attr('opacity', '1');
       d3.select(TOOLBOX_ID)
-        .html("Hover your mouse over a star to see it's stellar properties"); 
+        .html("Hover your mouse over a star to see its stellar properties"); 
     })
 
   dotsEnter.on("click", function(event, d){
