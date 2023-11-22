@@ -2,6 +2,7 @@
 const CHART_HEIGHT = 600
 const CHART_WIDTH = 1000
 const DIV_ID = "#hr-div"
+const TOOLBOX_ID = "#hr-toolbox"
 const sourceFile = "./d3_hr/isochrones.csv"
 
 // call init on load
@@ -129,13 +130,21 @@ function updateScatterPlot (data, svg) {
       d3.select(this).transition()
         .duration('50')
         .attr("class", "hovered")
-        .attr('opacity', '.85');     
+        .attr('opacity', '.85');
+      d3.select(TOOLBOX_ID).html(
+        "Age: "         + numberFormatToString(d.Age) + " years <br><br>" +
+        "Mass: "        + d.mass + "<br><br>" +
+        "Temperature: " + d.logTe + "<br><br>" +
+        "Luminosity: "  + d.logL + "<br><br>"
+        );
     })
     .on('mouseout', function (d, i) {
       d3.select(this).transition()
         .duration('50')
         .attr("class", null)
         .attr('opacity', '1');
+      d3.select(TOOLBOX_ID)
+        .html("Hover your mouse over a star to see it's stellar properties"); 
     })
 
   dotsEnter.on("click", function(event, d){
@@ -183,4 +192,25 @@ function updateScatterPlot (data, svg) {
     .attr("y", marginTop - 10)
     .attr("transform", "rotate(-90)")
     .text("Luminosity (UNITS)");
+}
+
+// Helper function to convert number formatting
+// https://stackoverflow.com/questions/36734201/how-to-convert-numbers-to-million-in-javascript
+function numberFormatToString(labelValue) {
+
+  // Nine Zeroes for Billions
+  return Math.abs(Number(labelValue)) >= 1.0e+9
+
+  ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + " billion"
+  // Six Zeroes for Millions 
+  : Math.abs(Number(labelValue)) >= 1.0e+6
+
+  ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + " million"
+  // Three Zeroes for Thousands
+  : Math.abs(Number(labelValue)) >= 1.0e+3
+
+  ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + " thousand"
+
+  : Math.abs(Number(labelValue));
+
 }
