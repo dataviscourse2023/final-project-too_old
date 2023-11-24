@@ -28,3 +28,30 @@ svg{
     font: 12px sans-serif;
     fill: white;
 }
+
+#hr-div{
+    position: relative;
+}
+
+.slideContainer {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 700px;
+    height: 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+.slideContainer label {
+    width: 100px;
+    font: 16px sans-serif;
+    color: var(--color-text-white);
+    padding-right: 10px;
+}
+.slideContainer input[type="range"] {
+    width: 100%;
+    height: 2px;
+} 
+   

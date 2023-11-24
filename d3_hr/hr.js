@@ -18,13 +18,17 @@ function init () {
     .style("height", CHART_HEIGHT + "px")
     .attr("class","scatter-plot")
     .attr("id", "hr")
-  console.log(hrScatterPlot);
 
   for(let chart of [hrScatterPlot]){
     chart.append("g").attr("class", "xAxis")
     chart.append("g").attr("class", "yAxis")
   }
 
+  // Add container for the data (z-axis / age) slider
+  let slideContainer = d3.select("#hr-div").append("div")
+    .attr("class","slideContainer")
+    .attr("id","hrSlideContainer")
+  slideContainer.append("label").attr("for","slider").html("Cohort Age:")
 
   //set up event listeners
   //call loadData to update data
@@ -59,14 +63,14 @@ function loadData (source) {
  * @param data
  */
 function update (data) {
-  updateScatterPlot(data, d3.select("#hr"));
+  updateScatterPlot(data, d3.select("#hr"), d3.select("#hrSlideContainer"));
 }
 
 
 /**
  * update the scatter plot.
  */
-function updateScatterPlot (data, svg) {
+function updateScatterPlot (data, svg, slideContainer) {
   // Declare which columns we will be using for x and y columns
   const xColumn = "logTe"
   const yColumn = "logL" 
@@ -77,11 +81,11 @@ function updateScatterPlot (data, svg) {
   const height = CHART_HEIGHT;
   const marginTop = 60;
   const marginRight = 30;
-  const marginBottom = 45;
+  const marginBottom = 60;
   const marginLeft = 90;
 
   // Declare the x (horizontal position) scale.
-  //NOTE: SCALE IS BACKWARDS FOR TEMPERATURE
+  // NOTE: SCALE IS BACKWARDS FOR TEMPERATURE
   let xbuffer = 0.1;
   let xMin = d3.min(data, (d) => d[xColumn]);
   let xMax = d3.max(data, (d) => d[xColumn]);
@@ -105,7 +109,7 @@ function updateScatterPlot (data, svg) {
   const yTicks = y.ticks()
     .filter(tick => Number.isInteger(tick))
 
-  // Declare the z (dot color) scale.
+  // Declare the z (age) scale for dot colors
   // const z = d3.scaleLinear()
   //   .domain(d3.extent(data, (d) => d[zColumn]))
   //   .range(['blue','red'])
@@ -114,6 +118,14 @@ function updateScatterPlot (data, svg) {
     .domain(d3.extent(data, (d) => d[zColumn]))
     .interpolator(d3.interpolateReds)
 
+  // Create the z(age) slider for filtering data  
+  let slider = slideContainer.append("input")
+    .attr("type","range")
+    .attr("min","0")
+    .attr("max","100")
+    .attr("value","50")
+    .attr("id", "slider")
+    .attr("step","20")
 
   // ****************** Dots section ***************************
 
@@ -181,7 +193,7 @@ function updateScatterPlot (data, svg) {
       .attr("class", "x label")
       .attr("text-anchor", "middle")
       .attr("x", width / 2)
-      .attr("y", height - marginBottom / 2 + 15)
+      .attr("y", height - marginBottom / 2 + 10)
       .text("Temperature (UNITS)");
 
   // Add the Y Axis Label
