@@ -1,6 +1,6 @@
 // Script globals
 const CHART_HEIGHT = 600
-const CHART_WIDTH = 1100
+const CHART_WIDTH = 1000
 const DIV_ID = "#hr-div"
 const TOOLBOX_ID = "#hr-toolbox"
 const sourceFile = "./d3_hr/isochrones.csv"

@@ -105,7 +105,7 @@ html {
 
 .graphic {
     min-height: 600px;
-    min-width: 1100px;
+    min-width: 1000px;
     color: var(--color-text-white);
     background-color: var(--color-black);
 }

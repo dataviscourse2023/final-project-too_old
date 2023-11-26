@@ -6,9 +6,10 @@
 
 // Script globals
 const CHART_HEIGHT = 600
-const CHART_WIDTH = 1100
+const CHART_WIDTH = 1000
 const DIV_ID = "#tree-div"
 const TOOLBOX_ID = "#tree-toolbox"
+const NODE_DISTANCE = 160
 const CIRCLE_RADIUS = 30
 
 
@@ -70,7 +71,7 @@ function update(source) {
         links = treeData.descendants().slice(1);
 
     // Normalize for fixed-depth.
-    nodes.forEach(function(d){ d.y = d.depth * 180});
+    nodes.forEach(function(d){ d.y = d.depth * NODE_DISTANCE});
 
     // ****************** Nodes section ***************************
 
