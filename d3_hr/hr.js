@@ -129,10 +129,14 @@ function updateScatterPlot (data, svg, slideContainer) {
 
   // Use the z(age) slider to filter data
   let sliderInput = document.getElementById('slider');
+  let filteredData;
   sliderInput.oninput = function(){
+      let filteredAge = uniqueAges[this.value]
       slideContainer.selectAll("label").html(
-          "Cohort Age: <br>"+numberFormatToString(uniqueAges[this.value]) + " years"
+          "Cohort Age: <br>"+numberFormatToString(filteredAge) + " years"
         );
+
+      filteredData = data.filter( d => d.Age === filteredAge)
     }
   sliderInput.oninput();
 
@@ -141,7 +145,7 @@ function updateScatterPlot (data, svg, slideContainer) {
 
   // add dots
   let dots = svg.selectAll("circle")
-    .data(data);
+    .data(filteredData);
 
   // ENTER dots
   let dotsEnter = dots.enter().append("circle")
