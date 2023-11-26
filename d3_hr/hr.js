@@ -28,7 +28,7 @@ function init () {
   let slideContainer = d3.select("#hr-div").append("div")
     .attr("class","slideContainer")
     .attr("id","hrSlideContainer")
-  slideContainer.append("label").attr("for","slider").html("Cohort Age:")
+  slideContainer.append("label").attr("for","slider")
 
   //set up event listeners
   //call loadData to update data
@@ -124,15 +124,17 @@ function updateScatterPlot (data, svg, slideContainer) {
     .attr("id", "slider")  
     .attr("type", "range")
     .attr("min", 0)
-    .attr("max", uniqueAges.length)
+    .attr("max", uniqueAges.length -1 )
     .attr("value", 0)
 
+  // Use the z(age) slider to filter data
   let sliderInput = document.getElementById('slider');
   sliderInput.oninput = function(){
-      console.log(this.value);
-      console.log(uniqueAges[this.value]);
+      slideContainer.selectAll("label").html(
+          "Cohort Age: "+numberFormatToString(uniqueAges[this.value]) + " years"
+        );
     }
-    sliderInput.oninput();
+  sliderInput.oninput();
 
 
   // ****************** Dots section ***************************
