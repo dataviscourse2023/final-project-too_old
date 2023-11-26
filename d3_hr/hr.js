@@ -129,23 +129,55 @@ function updateScatterPlot (data, svg, slideContainer) {
 
   // Use the z(age) slider to filter data
   let sliderInput = document.getElementById('slider');
-  let filteredData;
   sliderInput.oninput = function(){
       let filteredAge = uniqueAges[this.value]
       slideContainer.selectAll("label").html(
           "Cohort Age: <br>"+numberFormatToString(filteredAge) + " years"
         );
 
-      filteredData = data.filter( d => d.Age === filteredAge)
+        console.log(data.filter( d => d.Age === filteredAge))
+        updateScatterPlotDots (data.filter( d => d.Age === filteredAge), svg, x, y, z, xColumn, yColumn, zColumn)
     }
   sliderInput.oninput();
 
+  // ****************** Axes section ***************************
 
+  // Update the X Axis
+  var xAxis = svg.selectAll("g.xAxis")
+    .transition()
+      .attr("transform", `translate(0,${height - marginBottom})`)
+      .call(d3.axisBottom(x).tickSizeOuter(0));
+
+  // Update the Y Axis
+  var yAxis = svg.selectAll("g.yAxis")
+    .transition()
+      .attr("transform", `translate(${marginLeft},0)`)
+      .call(d3.axisLeft(y).tickValues(yTicks))
+
+  // Add the X Axis label
+  var xAxisLabel = svg.append("text")
+      .attr("class", "x label")
+      .attr("text-anchor", "middle")
+      .attr("x", width / 2)
+      .attr("y", height - marginBottom / 2 + 10)
+      .text("Temperature (UNITS)");
+
+  // Add the Y Axis Label
+  var yAxisLabel = svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "middle")
+    .attr("x", - height / 2)
+    .attr("y", marginTop - 10)
+    .attr("transform", "rotate(-90)")
+    .text("Luminosity (UNITS)");
+}
+
+function updateScatterPlotDots(data, svg, x, y, z, xColumn, yColumn, zColumn) {
   // ****************** Dots section ***************************
 
   // add dots
   let dots = svg.selectAll("circle")
-    .data(filteredData);
+    .data(data);
 
   // ENTER dots
   let dotsEnter = dots.enter().append("circle")
@@ -179,45 +211,13 @@ function updateScatterPlot (data, svg, slideContainer) {
 
   // MERGE dots
   let dotsMerge = dotsEnter.merge(dots) 
-    .transition()
-      .attr("cx", (d) => x(d[xColumn]))
-      .attr("cy", (d) => y(d[yColumn]))
-      .attr("r", 2);
+    .attr("cx", (d) => x(d[xColumn]))
+    .attr("cy", (d) => y(d[yColumn]))
+    .attr("r", 2);
 
   // EXIT dots
   let dotsExit = dots.exit()
     .remove(); 
-
-  // ****************** Axes section ***************************
-
-  // Update the X Axis
-  var xAxis = svg.selectAll("g.xAxis")
-    .transition()
-      .attr("transform", `translate(0,${height - marginBottom})`)
-      .call(d3.axisBottom(x).tickSizeOuter(0));
-
-  // Update the Y Axis
-  var yAxis = svg.selectAll("g.yAxis")
-    .transition()
-      .attr("transform", `translate(${marginLeft},0)`)
-      .call(d3.axisLeft(y).tickValues(yTicks))
-
-  // Add the X Axis label
-  var xAxisLabel = svg.append("text")
-      .attr("class", "x label")
-      .attr("text-anchor", "middle")
-      .attr("x", width / 2)
-      .attr("y", height - marginBottom / 2 + 10)
-      .text("Temperature (UNITS)");
-
-  // Add the Y Axis Label
-  var yAxisLabel = svg.append("text")
-    .attr("class", "y label")
-    .attr("text-anchor", "middle")
-    .attr("x", - height / 2)
-    .attr("y", marginTop - 10)
-    .attr("transform", "rotate(-90)")
-    .text("Luminosity (UNITS)");
 }
 
 // Helper function to convert number formatting

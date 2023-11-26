@@ -58,15 +58,14 @@ html {
 
 .wrapper {
     min-height: 700px;
-    min-width: 1300px;
+    width: 1300px;
     background-color: transparent;    
     border: 3px solid var(--color-primary-darker);
     border-radius: 5px;
 }
 
 .titlebox_wrapper {
-    height: 10vh;
-    min-height: 100px;
+    height: 100px;
     display: flex;
     flex-direction: column;
     background-color: var(--color-white);
@@ -85,7 +84,9 @@ html {
 .textbox{
     background-color: var(--color-white);
     font: 16px sans-serif;
-    padding: 15px;
+    padding: 0px 15px 0px 15px;
+    display: flex;
+    align-items: center;
 }
 
 .graphic_wrapper {
