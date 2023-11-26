@@ -137,6 +137,7 @@ function updateScatterPlot (data, svg, slideContainer) {
 
         console.log(data.filter( d => d.Age === filteredAge))
         updateScatterPlotDots (data.filter( d => d.Age === filteredAge), svg, x, y, z, xColumn, yColumn, zColumn)
+        sliderInput.style.setProperty('background', z(filteredAge))
     }
   sliderInput.oninput();
 
@@ -181,6 +182,9 @@ function updateScatterPlotDots(data, svg, x, y, z, xColumn, yColumn, zColumn) {
 
   // ENTER dots
   let dotsEnter = dots.enter().append("circle")
+    .attr("cx", (d) => x(d[xColumn]))
+    .attr("cy", (d) => y(d[yColumn]))
+    .attr("r", 2)
     .attr("fill", d => z(d[zColumn]))
 
   // Add mouseover and onclick events
@@ -213,7 +217,8 @@ function updateScatterPlotDots(data, svg, x, y, z, xColumn, yColumn, zColumn) {
   let dotsMerge = dotsEnter.merge(dots) 
     .attr("cx", (d) => x(d[xColumn]))
     .attr("cy", (d) => y(d[yColumn]))
-    .attr("r", 2);
+    .attr("r", 2)
+    .attr("fill", d => z(d[zColumn]))
 
   // EXIT dots
   let dotsExit = dots.exit()
