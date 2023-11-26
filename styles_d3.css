@@ -45,7 +45,7 @@ svg{
     align-items: center;
 }
 .slideContainer label {
-    width: 100px;
+    width: 200px;
     font: 16px sans-serif;
     color: var(--color-text-white);
     padding-right: 10px;

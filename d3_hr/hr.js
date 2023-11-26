@@ -131,7 +131,7 @@ function updateScatterPlot (data, svg, slideContainer) {
   let sliderInput = document.getElementById('slider');
   sliderInput.oninput = function(){
       slideContainer.selectAll("label").html(
-          "Cohort Age: "+numberFormatToString(uniqueAges[this.value]) + " years"
+          "Cohort Age: <br>"+numberFormatToString(uniqueAges[this.value]) + " years"
         );
     }
   sliderInput.oninput();
