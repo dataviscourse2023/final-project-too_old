@@ -12,12 +12,12 @@ To this aim, we create a webpage that hosts three visualizations:
 In order to see the visualizations, locally host the index.html file.
 
 The project folders are organized as follows:
-* **The Main Folder** contains index.html, along with the stylesheets and app.js. The app.js file simply points to the underlying javascript files used for each visualization.
+* **The root folder** contains index.html, along with the stylesheets and app.js. The app.js file simply points to the underlying javascript files used for each visualization.
 * **/d3_tree/** contains all of the data, logic, and images used for the Tree Diagram
 * **/d3_hr/** contains all of the data, and logic used for the Hertzsprung–Russell diagram
 * **/d3_scatterplot/** contains the logic used for the scatterplot. This scatterplot references the data used in the Hertsprung-Russell diagram
 * **/favicon/** holds the image used for the small icon on the web-browser tab
-* **/Project Proposal/** holds the project proposal and process book
-* **/Supplementary Work/** contains scratch-work and side-work that is not part of the main project, but was helpful during development
+* **/Project Proposal and Process Book/** holds the project proposal and process book
+* **/Supplementary Work/** contains scratch-work and side-work that is not part of the main project, but was used during development
 
 We hope you enjoy the project!
