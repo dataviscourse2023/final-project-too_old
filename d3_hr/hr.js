@@ -119,13 +119,21 @@ function updateScatterPlot (data, svg, slideContainer) {
     .interpolator(d3.interpolateReds)
 
   // Create the z(age) slider for filtering data  
+  let uniqueAges = [...new Set(data.map(item => item.Age))];
   let slider = slideContainer.append("input")
-    .attr("type","range")
-    .attr("min","0")
-    .attr("max","100")
-    .attr("value","50")
-    .attr("id", "slider")
-    .attr("step","20")
+    .attr("id", "slider")  
+    .attr("type", "range")
+    .attr("min", 0)
+    .attr("max", uniqueAges.length)
+    .attr("value", 0)
+
+  let sliderInput = document.getElementById('slider');
+  sliderInput.oninput = function(){
+      console.log(this.value);
+      console.log(uniqueAges[this.value]);
+    }
+    sliderInput.oninput();
+
 
   // ****************** Dots section ***************************
 
