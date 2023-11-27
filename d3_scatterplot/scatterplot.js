@@ -97,7 +97,6 @@ function update (data) {
     }
 
     //call initial update
-    console.log(document.getElementById("xMetric").value, document.getElementById("yMetric").value, metrics)
     updateScatterPlot(data, d3.select("#scatterplot"), document.getElementById("xMetric").value, document.getElementById("yMetric").value, metrics);
 }
 
@@ -138,11 +137,6 @@ function updateScatterPlot (data, svg, xColumn, yColumn, metrics) {
 
   const yTicks = y.ticks()
     .filter(tick => Number.isInteger(tick))
-
-  // Format axis when Age is chosen
-  let formatValue = d3.format(".2s");
-  if(xColumn === "Age"){x.tickFormat(function(d) { return formatValue(d)});}
-  if(yColumn === "Age"){y.tickFormat(function(d) { return formatValue(d)});}
 
   // ****************** Dots section ***************************
 
@@ -206,6 +200,11 @@ function updateScatterPlot (data, svg, xColumn, yColumn, metrics) {
       .attr("transform", `translate(${marginLeft},0)`)
       .call(d3.axisLeft(y).tickValues(yTicks))
 
+  // Format axis when Age is chosen
+  let formatValue = d3.format(".2s");
+  if(xColumn === "Age"){xAxis.call(d3.axisBottom(x).tickFormat(function(d) { return formatValue(d).replace(/G/, " b")}));}
+  if(yColumn === "Age"){yAxis.call(d3.axisLeft(y).tickFormat(function(d) { return formatValue(d).replace(/G/, " b")}));}
+
   // Add the X Axis label
   var xAxisLabel = svg.selectAll("text.xAxisLabel")
       .attr("text-anchor", "middle")
@@ -217,7 +216,7 @@ function updateScatterPlot (data, svg, xColumn, yColumn, metrics) {
   var yAxisLabel = svg.selectAll("text.yAxisLabel")
     .attr("text-anchor", "middle")
     .attr("x", - height / 2)
-    .attr("y", marginTop - 10)
+    .attr("y", marginTop - 20)
     .attr("transform", "rotate(-90)")
     .text(metrics[yColumn]);
 }
