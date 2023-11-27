@@ -19,7 +19,11 @@ svg{
     stroke-width: 4px;
 }
 
-/* scatter plot elements */
+/* hr scatter plot elements */
+.scatter-plot {
+    fill: var(--color-text-white);
+}
+
 .scatter-plot .hovered {
     fill: var(--color-secondary);
 }
@@ -88,3 +92,24 @@ svg{
 .slideContainer input[type="range"]::-moz-range-thumb:active {
     background: var(--color-secondary-darkest);
 } 
+
+/* scatter plot elements */
+#scatterplot-div{
+    position: relative;
+}
+
+.dropdownContainer {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 700px;
+    height: 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.dropdownLabel {
+    padding-left: 20px;
+}

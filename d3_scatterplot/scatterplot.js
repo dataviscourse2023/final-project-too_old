@@ -24,8 +24,7 @@ function init () {
     chart.append("g").attr("class", "yAxis")
   }
 
-  //set up event listeners
-  //call loadData to update data
+  //call loadData to initialize the dropdown boxes, then update data and initialize visualization
   loadData(sourceFile);
 }
 
@@ -56,7 +55,38 @@ function loadData (source) {
  * @param data
  */
 function update (data) {
-  updateScatterPlot(data, d3.select("#scatterplot"));
+    //render dropdowns
+    let dropdownContainer = d3.select("#scatterplot-div").append("div")
+        .attr("class","dropdownContainer")
+        .attr("id","scatterplotDropdownContainer")
+    dropdownContainer.append("label")
+        .attr("class","dropdownLabel")
+        .html("x-axis: ")
+    let xMetric = dropdownContainer.append("select")
+        .attr("class","dropdownSelector")
+        .attr("id","xMetric")
+    dropdownContainer.append("label")
+        .attr("class","dropdownLabel")
+        .html("y-axis: ")
+    let yMetric = dropdownContainer.append("select")
+        .attr("class","dropdownSelector")
+        .attr("id","yMetric")
+    
+    for(let metric of [xMetric, yMetric]){
+        for(let value of ["Age", "mass", "logL", "logTe"]){
+            metric.append("option")
+            .attr("value",value)
+            .html(value)
+        }
+    }
+
+    //attach event listeners
+    // for(source of ["xMetric", "yMetric"]){
+    // document.getElementById(source).onchange = function () {updateScatterPlot(data, d3.select("#scatterplot"))};  
+    // }
+
+    //call initial update
+    updateScatterPlot(data, d3.select("#scatterplot"));
 }
 
 
@@ -179,4 +209,25 @@ function updateScatterPlot (data, svg) {
     .attr("y", marginTop - 10)
     .attr("transform", "rotate(-90)")
     .text("Luminosity (UNITS)");
+}
+
+// Helper function to convert number formatting
+// https://stackoverflow.com/questions/36734201/how-to-convert-numbers-to-million-in-javascript
+function numberFormatToString(labelValue) {
+
+    // Nine Zeroes for Billions
+    return Math.abs(Number(labelValue)) >= 1.0e+9
+  
+    ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + " billion"
+    // Six Zeroes for Millions 
+    : Math.abs(Number(labelValue)) >= 1.0e+6
+  
+    ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + " million"
+    // Three Zeroes for Thousands
+    : Math.abs(Number(labelValue)) >= 1.0e+3
+  
+    ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + " thousand"
+  
+    : Math.abs(Number(labelValue));
+  
 }
