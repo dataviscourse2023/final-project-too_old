@@ -1,8 +1,8 @@
 // Script globals
 const CHART_HEIGHT = 600
 const CHART_WIDTH = 1000
-const DIV_ID = "#hr-div"
-const TOOLBOX_ID = "#hr-toolbox"
+const DIV_ID = "#scatterplot-div"
+const TOOLBOX_ID = "#scatterplot-toolbox"
 const sourceFile = "./data/isochrones.csv"
 
 // call init on load
@@ -13,22 +13,16 @@ init();
  */
 function init () {
   //set up initial chart spaces
-  let hrScatterPlot = d3.select("#hr-div").append("svg")
+  let ScatterPlot = d3.select(DIV_ID).append("svg")
     .style("width", CHART_WIDTH + "px")
     .style("height", CHART_HEIGHT + "px")
     .attr("class","scatter-plot")
-    .attr("id", "hr")
+    .attr("id", "scatterplot")
 
-  for(let chart of [hrScatterPlot]){
+  for(let chart of [ScatterPlot]){
     chart.append("g").attr("class", "xAxis")
     chart.append("g").attr("class", "yAxis")
   }
-
-  // Add container for the data (z-axis / age) slider
-  let slideContainer = d3.select("#hr-div").append("div")
-    .attr("class","slideContainer")
-    .attr("id","hrSlideContainer")
-  slideContainer.append("label").attr("for","slider")
 
   //set up event listeners
   //call loadData to update data
@@ -47,8 +41,7 @@ function loadData (source) {
         Age: parseFloat(d.Age),
         mass: parseFloat(d.Mass),
         logL: parseFloat(d.logL),
-        logTe: parseFloat(d.logTe),
-        // Gmag: parseFloat(d.Gmag)
+        logTe: parseFloat(d.logTe)
       }));
         // console.log(data)
         update(data);
@@ -63,18 +56,17 @@ function loadData (source) {
  * @param data
  */
 function update (data) {
-  updateScatterPlot(data, d3.select("#hr"), d3.select("#hrSlideContainer"));
+  updateScatterPlot(data, d3.select("#scatterplot"));
 }
 
 
 /**
  * update the scatter plot.
  */
-function updateScatterPlot (data, svg, slideContainer) {
+function updateScatterPlot (data, svg) {
   // Declare which columns we will be using for x and y columns
   const xColumn = "logTe"
   const yColumn = "logL" 
-  const zColumn = "Age"
 
   // Declare the chart dimensions and margins.
   const width = CHART_WIDTH;
@@ -109,70 +101,6 @@ function updateScatterPlot (data, svg, slideContainer) {
   const yTicks = y.ticks()
     .filter(tick => Number.isInteger(tick))
 
-  // Declare the z (age) scale for dot colors
-  // const z = d3.scaleLinear()
-  //   .domain(d3.extent(data, (d) => d[zColumn]))
-  //   .range(['blue','red'])
-  //   .clamp(true)
-  const z = d3.scaleSequential()
-    .domain(d3.extent(data, (d) => d[zColumn]))
-    .interpolator(d3.interpolateReds)
-
-  // Create the z(age) slider for filtering data  
-  let uniqueAges = [...new Set(data.map(item => item.Age))];
-  let slider = slideContainer.append("input")
-    .attr("id", "slider")  
-    .attr("type", "range")
-    .attr("min", 0)
-    .attr("max", uniqueAges.length -1 )
-    .attr("value", 0)
-
-  // Use the z(age) slider to filter data
-  let sliderInput = document.getElementById('slider');
-  sliderInput.oninput = function(){
-      let filteredAge = uniqueAges[this.value]
-      slideContainer.selectAll("label").html(
-          "Cohort Age: <br>"+numberFormatToString(filteredAge) + " years"
-        );
-
-        updateScatterPlotDots (data.filter( d => d.Age === filteredAge), svg, x, y, z, xColumn, yColumn, zColumn)
-        sliderInput.style.setProperty('background', z(filteredAge))
-    }
-  sliderInput.oninput();
-
-  // ****************** Axes section ***************************
-
-  // Update the X Axis
-  var xAxis = svg.selectAll("g.xAxis")
-    .transition()
-      .attr("transform", `translate(0,${height - marginBottom})`)
-      .call(d3.axisBottom(x).tickSizeOuter(0));
-
-  // Update the Y Axis
-  var yAxis = svg.selectAll("g.yAxis")
-    .transition()
-      .attr("transform", `translate(${marginLeft},0)`)
-      .call(d3.axisLeft(y).tickValues(yTicks))
-
-  // Add the X Axis label
-  var xAxisLabel = svg.append("text")
-      .attr("class", "x label")
-      .attr("text-anchor", "middle")
-      .attr("x", width / 2)
-      .attr("y", height - marginBottom / 2 + 10)
-      .text("Temperature (UNITS)");
-
-  // Add the Y Axis Label
-  var yAxisLabel = svg.append("text")
-    .attr("class", "y label")
-    .attr("text-anchor", "middle")
-    .attr("x", - height / 2)
-    .attr("y", marginTop - 10)
-    .attr("transform", "rotate(-90)")
-    .text("Luminosity (UNITS)");
-}
-
-function updateScatterPlotDots(data, svg, x, y, z, xColumn, yColumn, zColumn) {
   // ****************** Dots section ***************************
 
   // add dots
@@ -184,7 +112,6 @@ function updateScatterPlotDots(data, svg, x, y, z, xColumn, yColumn, zColumn) {
     .attr("cx", (d) => x(d[xColumn]))
     .attr("cy", (d) => y(d[yColumn]))
     .attr("r", 2)
-    .attr("fill", d => z(d[zColumn]))
 
   // Add mouseover and onclick events
   dotsEnter.on('mouseover', function (event, d) {
@@ -217,30 +144,39 @@ function updateScatterPlotDots(data, svg, x, y, z, xColumn, yColumn, zColumn) {
     .attr("cx", (d) => x(d[xColumn]))
     .attr("cy", (d) => y(d[yColumn]))
     .attr("r", 2)
-    .attr("fill", d => z(d[zColumn]))
 
   // EXIT dots
   let dotsExit = dots.exit()
     .remove(); 
-}
 
-// Helper function to convert number formatting
-// https://stackoverflow.com/questions/36734201/how-to-convert-numbers-to-million-in-javascript
-function numberFormatToString(labelValue) {
+  // ****************** Axes section ***************************
 
-  // Nine Zeroes for Billions
-  return Math.abs(Number(labelValue)) >= 1.0e+9
+  // Update the X Axis
+  var xAxis = svg.selectAll("g.xAxis")
+    .transition()
+      .attr("transform", `translate(0,${height - marginBottom})`)
+      .call(d3.axisBottom(x).tickSizeOuter(0));
 
-  ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + " billion"
-  // Six Zeroes for Millions 
-  : Math.abs(Number(labelValue)) >= 1.0e+6
+  // Update the Y Axis
+  var yAxis = svg.selectAll("g.yAxis")
+    .transition()
+      .attr("transform", `translate(${marginLeft},0)`)
+      .call(d3.axisLeft(y).tickValues(yTicks))
 
-  ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + " million"
-  // Three Zeroes for Thousands
-  : Math.abs(Number(labelValue)) >= 1.0e+3
+  // Add the X Axis label
+  var xAxisLabel = svg.append("text")
+      .attr("class", "x label")
+      .attr("text-anchor", "middle")
+      .attr("x", width / 2)
+      .attr("y", height - marginBottom / 2 + 10)
+      .text("Temperature (UNITS)");
 
-  ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + " thousand"
-
-  : Math.abs(Number(labelValue));
-
+  // Add the Y Axis Label
+  var yAxisLabel = svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "middle")
+    .attr("x", - height / 2)
+    .attr("y", marginTop - 10)
+    .attr("transform", "rotate(-90)")
+    .text("Luminosity (UNITS)");
 }

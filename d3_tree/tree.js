@@ -11,10 +11,12 @@ const DIV_ID = "#tree-div"
 const TOOLBOX_ID = "#tree-toolbox"
 const NODE_DISTANCE = 160
 const CIRCLE_RADIUS = 30
+const DATA_FOLDER = "./d3_tree/"
+const IMAGE_FOLDER = "./d3_tree/images/"
 
 
 // Declare initial objects
-let treeData = await d3.json("d3_tree/data.json");
+let treeData = await d3.json(DATA_FOLDER + "data.json");
 
 // Set the dimensions and margins of the diagram
 let margin  = {top: 10, right: 90, bottom: 10, left: 90};
@@ -108,7 +110,7 @@ function update(source) {
         .attr('height',CIRCLE_RADIUS*2)
         .attr('width',CIRCLE_RADIUS*2)
         .append('image')
-            .attr('xlink:href',function(d,i){ return './d3_tree/images/' + d.data.image; })
+            .attr('xlink:href',function(d,i){ return IMAGE_FOLDER + d.data.image; })
             .attr('height',CIRCLE_RADIUS*2)
             .attr('width',CIRCLE_RADIUS*2)
 
@@ -129,7 +131,7 @@ function update(source) {
     // Add mouseover handler
     nodeUpdate.on("mouseover", function(event, d){
             // Fetch node image and prepare the image+description html elements
-            let imgSrc = "'./d3_tree/images/" + d.data.image + "'";
+            let imgSrc = "'"+ IMAGE_FOLDER + d.data.image + "'";
             let toolboxHTML = 
                 "<div style='width:240px;height:160px;position:relative;overflow:hidden;'>"+
                 "<img src="+imgSrc+" style='position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;width:100%;' />"+
