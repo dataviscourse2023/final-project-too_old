@@ -72,11 +72,20 @@ function update (data) {
         .attr("class","dropdownSelector")
         .attr("id","yMetric")
     
+
+    // add metrics to dropdown choices
+    var metrics = {
+      Age: "Age",
+      mass: "Mass",
+      logL: "Luminosity (UNITS)",
+      logTe: "Temperature (UNITS)",
+    };
+
     for(let metric of [xMetric, yMetric]){
-        for(let value of ["Age", "mass", "logL", "logTe"]){
+        for(let key in metrics){
             metric.append("option")
-            .attr("value",value)
-            .html(value)
+            .attr("value",key)
+            .html(metrics[key])
         }
     }
 
