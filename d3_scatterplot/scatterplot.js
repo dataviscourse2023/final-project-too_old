@@ -22,6 +22,8 @@ function init () {
   for(let chart of [ScatterPlot]){
     chart.append("g").attr("class", "xAxis")
     chart.append("g").attr("class", "yAxis")
+    chart.append("text").attr("class", "xAxisLabel")
+    chart.append("text").attr("class", "yAxisLabel")
   }
 
   //call loadData to initialize the dropdown boxes, then update data and initialize visualization
@@ -51,11 +53,11 @@ function loadData (source) {
 }
 
 /**
- * Render the visualizations
+ * Add dropdown choices and render the visualizations
  * @param data
  */
 function update (data) {
-    //render dropdowns
+    // attach dropdowns
     let dropdownContainer = d3.select("#scatterplot-div").append("div")
         .attr("class","dropdownContainer")
         .attr("id","scatterplotDropdownContainer")
@@ -72,15 +74,13 @@ function update (data) {
         .attr("class","dropdownSelector")
         .attr("id","yMetric")
     
-
-    // add metrics to dropdown choices
+    // attach dropdown choices
     var metrics = {
-      Age: "Age",
-      mass: "Mass",
-      logL: "Luminosity (UNITS)",
-      logTe: "Temperature (UNITS)",
-    };
-
+        Age: "Age",
+        mass: "Mass",
+        logL: "Luminosity (UNITS)",
+        logTe: "Temperature (UNITS)",
+      };
     for(let metric of [xMetric, yMetric]){
         for(let key in metrics){
             metric.append("option")
@@ -89,24 +89,23 @@ function update (data) {
         }
     }
 
-    //attach event listeners
-    // for(source of ["xMetric", "yMetric"]){
-    // document.getElementById(source).onchange = function () {updateScatterPlot(data, d3.select("#scatterplot"))};  
-    // }
+    // attach event listeners
+    for(let source of ["xMetric", "yMetric"]){
+      document.getElementById(source).onchange = function () {
+        updateScatterPlot(data, d3.select("#scatterplot"), document.getElementById("xMetric").value, document.getElementById("yMetric").value, metrics)
+      };  
+    }
 
     //call initial update
-    updateScatterPlot(data, d3.select("#scatterplot"));
+    console.log(document.getElementById("xMetric").value, document.getElementById("yMetric").value, metrics)
+    updateScatterPlot(data, d3.select("#scatterplot"), document.getElementById("xMetric").value, document.getElementById("yMetric").value, metrics);
 }
 
 
 /**
  * update the scatter plot.
  */
-function updateScatterPlot (data, svg) {
-  // Declare which columns we will be using for x and y columns
-  const xColumn = "logTe"
-  const yColumn = "logL" 
-
+function updateScatterPlot (data, svg, xColumn, yColumn, metrics) {
   // Declare the chart dimensions and margins.
   const width = CHART_WIDTH;
   const height = CHART_HEIGHT;
@@ -117,8 +116,8 @@ function updateScatterPlot (data, svg) {
 
   // Declare the x (horizontal position) scale.
   // NOTE: SCALE IS BACKWARDS FOR TEMPERATURE
-  let xbuffer = 0.1;
-  let xMin = d3.min(data, (d) => d[xColumn]);
+  let xbuffer = 0.0;
+  let xMin = d3.min(data, (d) => d[xColumn]);1
   let xMax = d3.max(data, (d) => d[xColumn]);
   let xDomain = new Array();
   if(xColumn === "logTe"){
@@ -132,13 +131,18 @@ function updateScatterPlot (data, svg) {
     .range([marginLeft, width - marginRight])
   
   // Declare the y (vertical position) scale.
-  let ybuffer = 2;
+  let ybuffer = 0;
   const y = d3.scaleLinear()
     .domain([d3.min(data, (d) => d[yColumn]) - ybuffer, d3.max(data, (d) => d[yColumn]) + ybuffer])
     .range([height - marginBottom, marginTop])
 
   const yTicks = y.ticks()
     .filter(tick => Number.isInteger(tick))
+
+  // Format axis when Age is chosen
+  let formatValue = d3.format(".2s");
+  if(xColumn === "Age"){x.tickFormat(function(d) { return formatValue(d)});}
+  if(yColumn === "Age"){y.tickFormat(function(d) { return formatValue(d)});}
 
   // ****************** Dots section ***************************
 
@@ -203,21 +207,19 @@ function updateScatterPlot (data, svg) {
       .call(d3.axisLeft(y).tickValues(yTicks))
 
   // Add the X Axis label
-  var xAxisLabel = svg.append("text")
-      .attr("class", "x label")
+  var xAxisLabel = svg.selectAll("text.xAxisLabel")
       .attr("text-anchor", "middle")
       .attr("x", width / 2)
       .attr("y", height - marginBottom / 2 + 10)
-      .text("Temperature (UNITS)");
+      .text(metrics[xColumn]);
 
   // Add the Y Axis Label
-  var yAxisLabel = svg.append("text")
-    .attr("class", "y label")
+  var yAxisLabel = svg.selectAll("text.yAxisLabel")
     .attr("text-anchor", "middle")
     .attr("x", - height / 2)
     .attr("y", marginTop - 10)
     .attr("transform", "rotate(-90)")
-    .text("Luminosity (UNITS)");
+    .text(metrics[yColumn]);
 }
 
 // Helper function to convert number formatting
