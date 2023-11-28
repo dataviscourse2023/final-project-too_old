@@ -42,7 +42,8 @@ function loadData (source) {
         Age: parseFloat(d.Age),
         mass: parseFloat(d.Mass),
         logL: parseFloat(d.logL),
-        logTe: parseFloat(d.logTe)
+        logTe: parseFloat(d.logTe),
+        logg: parseFloat(d.logg),
       }));
         // console.log(data)
         update(data);
@@ -80,6 +81,7 @@ function update (data) {
         mass: "Mass",
         logL: "Luminosity (UNITS)",
         logTe: "Temperature (UNITS)",
+        logg: "Gravity (UNITS)",
       };
     for(let metric of [xMetric, yMetric]){
         for(let key in metrics){
@@ -160,7 +162,8 @@ function updateScatterPlot (data, svg, xColumn, yColumn, metrics) {
         "Age: "         + numberFormatToString(d.Age) + " years <br><br>" +
         "Mass: "        + d.mass + "<br><br>" +
         "Temperature: " + d.logTe + "<br><br>" +
-        "Luminosity: "  + d.logL + "<br><br>"
+        "Luminosity: "  + d.logL + "<br><br>" +
+        "Gravity: "     + d.logg + "<br><br>"
         );
     })
     .on('mouseout', function (d, i) {
