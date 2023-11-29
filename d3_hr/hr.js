@@ -143,6 +143,10 @@ function updateScatterPlot (data, svg, slideContainer) {
     }
   sliderInput.oninput();
 
+  // colors palette
+var myCols = ["#ff3800","#ff5300","#ff6500","#ff7300","#ff7e00","#ff8912","#ff932c","#ff9d3f","#ffa54f","#ffad5e","#ffb46b","#ffbb78","#ffc184","#ffc78f","#ffcc99","#ffd1a3","#ffd5ad","#ffd9b6","#ffddbe","#ffe1c6","#ffe4ce","#ffe8d5","#ffebdc","#ffeee3","#fff0e9","#fff3ef","#fff5f5","#fff8fb","#fef9ff","#f9f6ff","#f5f3ff","#f0f1ff","#edefff","#e9edff","#e6ebff","#e3e9ff","#e0e7ff","#dde6ff","#dae4ff","#d8e3ff","#d6e1ff","#d3e0ff","#d1dfff","#cfddff","#cedcff","#ccdbff","#cadaff","#c9d9ff","#c7d8ff","#c6d8ff","#c4d7ff","#c3d6ff","#c2d5ff","#c1d4ff","#c0d4ff","#bfd3ff","#bed2ff","#bdd2ff","#bcd1ff","#bbd1ff","#bad0ff","#b9d0ff","#b8cfff","#b7cfff","#b7ceff","#b6ceff","#b5cdff","#b5cdff","#b4ccff","#b3ccff","#b3ccff","#b2cbff","#b2cbff","#b1caff","#b1caff","#b0caff","#afc9ff","#afc9ff","#afc9ff","#aec9ff","#aec8ff","#adc8ff","#adc8ff","#acc7ff","#acc7ff","#acc7ff","#abc7ff","#abc6ff","#aac6ff","#aac6ff","#aac6ff","#a9c6ff","#a9c5ff","#a9c5ff","#a9c5ff","#a8c5ff","#a8c5ff","#a8c4ff","#a7c4ff","#a7c4ff","#a7c4ff","#a7c4ff","#a6c3ff","#a6c3ff","#a6c3ff","#a6c3ff","#a5c3ff","#a5c3ff","#a5c3ff","#a5c2ff","#a4c2ff","#a4c2ff","#a4c2ff","#a4c2ff","#a4c2ff","#a3c2ff","#a3c1ff","#a3c1ff","#a3c1ff","#a3c1ff","#a3c1ff","#a2c1ff","#a2c1ff","#a2c1ff","#a2c1ff","#a2c0ff","#a2c0ff","#a1c0ff","#a1c0ff","#a1c0ff","#a1c0ff","#a1c0ff","#a1c0ff","#a1c0ff","#a0c0ff","#a0bfff","#a0bfff","#a0bfff","#a0bfff","#a0bfff","#a0bfff","#a0bfff","#9fbfff","#9fbfff","#9fbfff"];
+
+
   // ****************** Axes section ***************************
 
   // Update the X Axis
@@ -176,6 +180,67 @@ function updateScatterPlot (data, svg, slideContainer) {
     .attr("y", marginTop - 10)
     .attr("transform", "rotate(-90)")
     .text("Luminosity (Sun=1)");
+
+
+  // Add the temperature legend
+  var temperatureLegend = svg.append("g")
+  .attr("class", "temperature legend")
+
+  temperatureLegend.append("text")
+  .attr("text-anchor", "left")
+  .attr("x",  width / 11)
+  .attr("y", height - marginBottom / 2 + 10)
+  .html("&larr; increasing temperature")
+  .style("font-size", "0.8vw");
+
+  temperatureLegend.append("text")
+  .attr("text-anchor", "middle")
+  .attr("x", width - marginLeft)
+  .attr("y", height - marginBottom / 2 + 10)
+  .html("decreasing temperature &rarr;")
+  .style("font-size", "0.8vw");
+
+
+  // Add the color legend
+var legendStuff = svg.append("g").append("defs")
+.append("linearGradient")
+.attr("id","colorLegend")
+.attr("x1","0%")
+.attr("x2","50%")
+.attr("y1","0%")
+.attr("y2","0%");
+
+var colorLegend = svg.append("rect")
+.attr("class","color legend")
+.attr("stroke","white")
+.attr("stroke-width","2")
+.attr("fill","url(#colorLegend)")
+.attr("x", marginLeft)
+.attr("y", marginBottom * 8.75)
+.attr("width", width * 0.88)
+.attr("height", 13);
+
+d3.select('#colorLegend').append('stop')
+.attr('offset', '0%')
+.style('stop-color', myCols[myCols.length-1] )
+.style('stop-opacity', 1);
+
+d3.select('#colorLegend').append('stop')
+.attr('offset', (Math.log(xMax) - Math.log(20000))/(Math.log(xMax)-Math.log(xMin))*100 + '%') //color corresponding to 20000K
+.style('stop-color', myCols[myCols.length-1])
+.style('stop-opacity', 1);
+
+d3.select('#colorLegend').append('stop')
+.attr('offset', (Math.log(xMax)-Math.log(6400))/(Math.log(xMax)-Math.log(xMin))*100 + '%') //color corresponding to 6000K (almost white)
+.style('stop-color', "#fff8fb" )
+.style('stop-opacity', 1);
+
+d3.select('#colorLegend').append('stop')
+.attr('offset', '100%')
+.style('stop-color', myCols[3]) //color corresponding to 1500K
+.style('stop-opacity', 1);
+
+  
 }
 
 function updateScatterPlotDots(data, svg, x, y, z, xColumn, yColumn, zColumn) {
