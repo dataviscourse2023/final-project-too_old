@@ -47,7 +47,7 @@ function loadData (source) {
         Age: parseFloat(d.Age),
         mass: parseFloat(d.Mass),
         logL: parseFloat(d.logL),
-        logTe: parseFloat(d.logTe),
+        logTe: 10**parseFloat(d.logTe),
         // Gmag: parseFloat(d.Gmag)
       }));
         // console.log(data)
@@ -72,7 +72,7 @@ function update (data) {
  */
 function updateScatterPlot (data, svg, slideContainer) {
   // Declare which columns we will be using for x and y columns
-  const xColumn = "logTe"
+  const xColumn = "logTe" 
   const yColumn = "logL" 
   const zColumn = "Age"
 
@@ -114,9 +114,12 @@ function updateScatterPlot (data, svg, slideContainer) {
   //   .domain(d3.extent(data, (d) => d[zColumn]))
   //   .range(['blue','red'])
   //   .clamp(true)
-  const z = d3.scaleSequential()
+  const z = d3.scaleSequentialQuantile(d3.interpolateRdYlBu)
     .domain(d3.extent(data, (d) => d[zColumn]))
-    .interpolator(d3.interpolateReds)
+    .domain(Float32Array.from(data, (d) => d[zColumn]), d3.randomNormal(0.5, 0.15))
+    //.interpolator(d3.interpolateReds)
+
+  
 
   // Create the z(age) slider for filtering data  
   let uniqueAges = [...new Set(data.map(item => item.Age))];
@@ -160,7 +163,7 @@ function updateScatterPlot (data, svg, slideContainer) {
       .attr("text-anchor", "middle")
       .attr("x", width / 2)
       .attr("y", height - marginBottom / 2 + 10)
-      .text("Temperature (UNITS)");
+      .text("Temperature (Kelvin)");
 
   // Add the Y Axis Label
   var yAxisLabel = svg.append("text")
@@ -169,7 +172,7 @@ function updateScatterPlot (data, svg, slideContainer) {
     .attr("x", - height / 2)
     .attr("y", marginTop - 10)
     .attr("transform", "rotate(-90)")
-    .text("Luminosity (UNITS)");
+    .text("Luminosity (Sun=1)");
 }
 
 function updateScatterPlotDots(data, svg, x, y, z, xColumn, yColumn, zColumn) {
