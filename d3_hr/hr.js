@@ -155,7 +155,10 @@ function updateScatterPlot (data, svg, slideContainer) {
   var yAxis = svg.selectAll("g.yAxis")
     .transition()
       .attr("transform", `translate(${marginLeft},0)`)
-      .call(d3.axisLeft(y).tickValues(yTicks))
+      .call(d3.axisLeft(y)
+        .tickValues(yTicks)
+        // .tickFormat(d => `${10** d}`)
+        )
 
   // Add the X Axis label
   var xAxisLabel = svg.append("text")
