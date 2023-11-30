@@ -47,7 +47,7 @@ function loadData (source) {
         Age: parseFloat(d.Age),
         mass: parseFloat(d.Mass),
         logL: parseFloat(d.logL),
-        logTe: 10**parseFloat(d.logTe),
+        logTe: parseFloat(d.logTe),
         // Gmag: parseFloat(d.Gmag)
       }));
         // console.log(data)
@@ -87,18 +87,38 @@ function updateScatterPlot (data, svg, slideContainer) {
   // Declare the x (horizontal position) scale.
   // NOTE: SCALE IS BACKWARDS FOR TEMPERATURE
   let xbuffer = 0.1;
+  //let xThreshold = 30000;
   let xMin = d3.min(data, (d) => d[xColumn]);
   let xMax = d3.max(data, (d) => d[xColumn]);
+  console.log(xMax)
+  console.log(xMin)
+  
+  // Check if xMax exceeds the maximum threshold
+  //if (xMax > xThreshold) {
+   // xMax = xThreshold; // Set xMax to the maximum threshold value
+  //}
+
   let xDomain = new Array();
   if(xColumn === "logTe"){
       xDomain.push(xMax + xbuffer, xMin - xbuffer)
     }else{
       xDomain.push(xMin - xbuffer, xMax + xbuffer)
     };
+  // print check
+  console.log(xDomain);
+  console.log(xMax)
+  console.log(xMin)
 
+  // need color gradient to correspond to luminosity on x-axis
   const x = d3.scaleLinear()
     .domain(xDomain)
     .range([marginLeft, width - marginRight])
+    //.interpolator(d3.interpolateRdYlBu);
+    //svg.selectAll(".xColumn").data(data).enter().append("circle").attr("cx", function(d,i){return 30 + i*60}).attr("cy", 150).attr("r", 19).attr("fill", function(d){return myColor(d) })
+
+
+    //.clamp(true); // Add clamping to restrict values to the domain
+    
   
   // Declare the y (vertical position) scale.
   let ybuffer = 2;
@@ -110,16 +130,20 @@ function updateScatterPlot (data, svg, slideContainer) {
     .filter(tick => Number.isInteger(tick))
 
   // Declare the z (age) scale for dot colors
-  // const z = d3.scaleLinear()
-  //   .domain(d3.extent(data, (d) => d[zColumn]))
+  //const z = d3.scaleLinear()
+     //.domain(d3.extent(data, (d) => d[zColumn]))
   //   .range(['blue','red'])
-  //   .clamp(true)
+     //.clamp(true)
+  // color gradient working on age -- incorrect 
   const z = d3.scaleSequentialQuantile(d3.interpolateRdYlBu)
     .domain(d3.extent(data, (d) => d[zColumn]))
     .domain(Float32Array.from(data, (d) => d[zColumn]), d3.randomNormal(0.5, 0.15))
-    //.interpolator(d3.interpolateReds)
+    .interpolator(d3.interpolateReds)
 
-  
+  var myColor = d3.scaleSequential().domain(xDomain)
+  .interpolator(d3.interpolateRdYlBu);
+  svg.selectAll(".xColumn").data(data).enter().append("circle").attr("cx", function(d,i){return 30 + i*60}).attr("cy", 150).attr("r", 19).attr("fill", function(d){return myColor(d) })
+
 
   // Create the z(age) slider for filtering data  
   let uniqueAges = [...new Set(data.map(item => item.Age))];
@@ -226,12 +250,12 @@ d3.select('#colorLegend').append('stop')
 .style('stop-opacity', 1);
 
 d3.select('#colorLegend').append('stop')
-.attr('offset', (Math.log(xMax) - Math.log(20000))/(Math.log(xMax)-Math.log(xMin))*100 + '%') //color corresponding to 20000K
+.attr('offset', ((xMax) - (9.9))/((xMax)-(xMin))*100 + '%') //color corresponding to 20000K
 .style('stop-color', myCols[myCols.length-1])
 .style('stop-opacity', 1);
 
 d3.select('#colorLegend').append('stop')
-.attr('offset', (Math.log(xMax)-Math.log(6400))/(Math.log(xMax)-Math.log(xMin))*100 + '%') //color corresponding to 6000K (almost white)
+.attr('offset', ((xMax)-(8.76))/((xMax)-(xMin))*100 + '%') //color corresponding to 6000K (almost white)
 .style('stop-color', "#fff8fb" )
 .style('stop-opacity', 1);
 
@@ -239,6 +263,11 @@ d3.select('#colorLegend').append('stop')
 .attr('offset', '100%')
 .style('stop-color', myCols[3]) //color corresponding to 1500K
 .style('stop-opacity', 1);
+
+
+
+
+
 
   
 }

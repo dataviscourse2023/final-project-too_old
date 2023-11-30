@@ -42,7 +42,7 @@ html {
     background: -webkit-linear-gradient(var(--color-white), var(--color-gray-light));
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #c6bbb9;
 }
 
 .container {
@@ -77,13 +77,15 @@ html {
     color: var(--color-text-white);
     background-color: var(--color-base);
     text-align: center;
-    font: 22px sans-serif;
+    font: 32px sans-serif;
+    font-weight: bold;
     padding: 10px;
 }
 
 .textbox{
     background-color: var(--color-white);
     font: 16px sans-serif;
+    font-weight: bold;
     padding: 15px 15px 0px 15px;
     display: flex;
     align-items: center;
