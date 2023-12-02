@@ -1,6 +1,10 @@
 # final-project-too_old
 final-project-too_old created by GitHub Classroom
 
+Link to project website: https://corley-rebecca.github.io/ 
+
+Link to project screencast: https://youtu.be/gc3YXQl5id4?si=uQ0as3IJeul1g0tX
+
 This project is a data-visualization exercise created by Kevin Mooers and Rebecca Corely. The goal of this project is to illustrate fundamental concepts of stellar evolution. 
 To this aim, we create a webpage that hosts three visualizations: 
 |      | Illustration |
