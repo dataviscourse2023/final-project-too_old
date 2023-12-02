@@ -1,5 +1,5 @@
 html {
-    height: 3140px;
+    height: 3150px;
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
     color: var(--color-text-base);
 }
@@ -22,7 +22,6 @@ html {
 }
 
 #title{
-    position: absolute;
     top: 0px;
     height: 120px;
     width: 100%;
