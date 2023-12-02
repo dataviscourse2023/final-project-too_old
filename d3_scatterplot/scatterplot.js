@@ -1,8 +1,9 @@
 // Script globals
 const CHART_HEIGHT = 600
-const CHART_WIDTH = 1000
+const CHART_WIDTH = 1300
 const DIV_ID = "#scatterplot-div"
 const TOOLBOX_ID = "#scatterplot-toolbox"
+const TOOLTIP_ID = "#tooltip"
 const sourceFile = "./data/isochrones.csv"
 
 // call init on load
@@ -54,6 +55,7 @@ function loadData (source) {
     });
 }
 
+
 /**
  * Add dropdown choices and render the visualizations
  * @param data
@@ -78,12 +80,12 @@ function update (data) {
     
     // attach dropdown choices
     var metrics = {
-        Age: "Age",
-        mass: "Mass",
-        logL: "Luminosity (UNITS)",
-        logTe: "Temperature (UNITS)",
-        logg: "Gravity (UNITS)",
-        Mloss: "Mass Lost (UNITS)",
+        Age: "Age (billions of years)",
+        mass: "Mass (Solar Masses)",
+        logL: "Luminosity (Solar Luminosity)",
+        logTe: "Temperature (log(T))",
+        logg: "Gravity (dex)",
+        Mloss: "Mass Lost (Solar Masses)",
       };
     for(let metric of [xMetric, yMetric]){
         for(let key in metrics){
@@ -103,11 +105,19 @@ function update (data) {
     //call initial update
     updateScatterPlot(data, d3.select("#scatterplot"), document.getElementById("xMetric").value, document.getElementById("yMetric").value, metrics);
 }
+function random_elements(data)
+{
+  
+return data[Math.floor(Math.random()*data.length)];
+     
+}
+console.log(random_elements(data));
 
 
 /**
  * update the scatter plot.
  */
+
 function updateScatterPlot (data, svg, xColumn, yColumn, metrics) {
   // Declare the chart dimensions and margins.
   const width = CHART_WIDTH;
@@ -142,6 +152,10 @@ function updateScatterPlot (data, svg, xColumn, yColumn, metrics) {
   const yTicks = y.ticks()
     .filter(tick => Number.isInteger(tick))
 
+
+
+  
+
   // ****************** Dots section ***************************
 
   // add dots
@@ -160,23 +174,39 @@ function updateScatterPlot (data, svg, xColumn, yColumn, metrics) {
         .duration('50')
         .attr("class", "hovered")
         .attr('opacity', '.85');
-      d3.select(TOOLBOX_ID).html(
-        "Age: "         + numberFormatToString(d.Age) + " years <br><br>" +
-        "Mass: "        + d.mass + "<br><br>" +
-        "Temperature: " + d.logTe + "<br><br>" +
-        "Luminosity: "  + d.logL + "<br><br>" +
-        "Gravity: "     + d.logg + "<br><br>" +
-        "Mass Lost: "   + d.Mloss + "<br><br>"
+      // Calculate the position of the tooltip relative to the data point
+      const tooltipX = event.pageX + 7; // Adjust these values for proper positioning
+      const tooltipY = event.pageY - 7; // Adjust these values for proper positioning
+      // Create and position a div for the tooltip
+      const tooltip = d3.select("body")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("left", tooltipX + "px")
+        .style("top", tooltipY + "px")
+        .style("transform", `translate(${10}px, ${-10}px)`)
+        .html(
+          "Hi! I am a star! Here are some of my current properties: <br><br>" +
+          "Age: " + numberFormatToString(d.Age) + " years <br><br>" +
+          "Mass: " + d.mass + " solar masses" + "<br><br>" + 
+          "Temperature: " + d.logTe + "<br><br>" +
+          "Luminosity: " + d.logL + " ergs" + "<br><br>" + 
+          "Gravity: " + d.logg + " dex"
         );
+        
+        // Removing the tooltip on mouseout
+      d3.select(this).on('mouseout', function () {
+        d3.select(this).transition()
+          .duration('50')
+          .attr("class", "datapoint")
+          .attr('opacity', '1');
+        tooltip.remove();
+      });
+
+
     })
-    .on('mouseout', function (d, i) {
-      d3.select(this).transition()
-        .duration('50')
-        .attr("class", null)
-        .attr('opacity', '1');
-      d3.select(TOOLBOX_ID)
-        .html("Hover your mouse over a star to see its stellar properties"); 
-    })
+    
+   
 
   dotsEnter.on("click", function(event, d){
     console.log("x: " + d[xColumn] + ", y: " + d[yColumn])
@@ -199,6 +229,7 @@ function updateScatterPlot (data, svg, xColumn, yColumn, metrics) {
     .transition()
       .attr("transform", `translate(0,${height - marginBottom})`)
       .call(d3.axisBottom(x).tickSizeOuter(0));
+      
 
   // Update the Y Axis
   var yAxis = svg.selectAll("g.yAxis")
@@ -211,20 +242,48 @@ function updateScatterPlot (data, svg, xColumn, yColumn, metrics) {
   if(xColumn === "Age"){xAxis.call(d3.axisBottom(x).tickFormat(function(d) { return formatValue(d).replace(/G/, " b")}));}
   if(yColumn === "Age"){yAxis.call(d3.axisLeft(y).tickFormat(function(d) { return formatValue(d).replace(/G/, " b")}));}
 
-  // Add the X Axis label
-  var xAxisLabel = svg.selectAll("text.xAxisLabel")
-      .attr("text-anchor", "middle")
-      .attr("x", width / 2)
-      .attr("y", height - marginBottom / 2 + 10)
-      .text(metrics[xColumn]);
-
-  // Add the Y Axis Label
-  var yAxisLabel = svg.selectAll("text.yAxisLabel")
+  svg.selectAll(".xAxisLabel")
+    .remove(); // Remove existing labels to update them
+  // Update the X Axis label with tooltip functionality
+  svg.append("text")
+    .attr("class", "xAxisLabel")
+    .attr("text-anchor", "middle")
+    .attr("x", width / 2)
+    .attr("y", height - marginBottom / 2 + 10)
+    .text(metrics[xColumn])
+    .on("mouseover", function() {
+        tooltip.transition()
+            .duration(200)
+            .style("opacity", .9);
+        tooltip.html("Explanation for X-axis: " + metrics[xColumn])
+            .style("left", (d3.event.pageX) + "px")
+            .style("top", (d3.event.pageY - 28) + "px");
+    })
+    .on("mouseout", function() {
+        tooltip.transition()
+            .duration(500)
+            .style("opacity", 0);
+    });
+  // Update the Y Axis label with tooltip functionality
+  var yAxisLabel = svg.selectAll(".yAxisLabel")
     .attr("text-anchor", "middle")
     .attr("x", - height / 2)
     .attr("y", marginTop - 20)
     .attr("transform", "rotate(-90)")
-    .text(metrics[yColumn]);
+    .text(metrics[yColumn])
+    .on("mouseover", function() {
+        tooltip.transition()
+            .duration(200)
+            .style("opacity", .9);
+        tooltip.html("Explanation for Y-axis: " + metrics[yColumn])
+            .style("left", (d3.event.pageX) + "px")
+            .style("top", (d3.event.pageY - 28) + "px");
+    })
+    .on("mouseout", function() {
+        tooltip.transition()
+            .duration(500)
+            .style("opacity", 0);
+    });
 }
 
 // Helper function to convert number formatting

@@ -1,8 +1,9 @@
 // Script globals
 const CHART_HEIGHT = 600
-const CHART_WIDTH = 1000
+const CHART_WIDTH = 1300
 const DIV_ID = "#hr-div"
 const TOOLBOX_ID = "#hr-toolbox"
+const TOOLTIP_ID = "#tooltip"
 const sourceFile = "./data/isochrones.csv"
 
 // call init on load
@@ -138,11 +139,14 @@ function updateScatterPlot (data, svg, slideContainer) {
   const z = d3.scaleSequentialQuantile(d3.interpolateRdYlBu)
     .domain(d3.extent(data, (d) => d[zColumn]))
     .domain(Float32Array.from(data, (d) => d[zColumn]), d3.randomNormal(0.5, 0.15))
-    .interpolator(d3.interpolateReds)
+    //.interpolator(d3.interpolateReds)
 
-  var myColor = d3.scaleSequential().domain(xDomain)
-  .interpolator(d3.interpolateRdYlBu);
-  svg.selectAll(".xColumn").data(data).enter().append("circle").attr("cx", function(d,i){return 30 + i*60}).attr("cy", 150).attr("r", 19).attr("fill", function(d){return myColor(d) })
+  var myColor = d3.scaleSequential().domain([x(xMax), x(xMin)])
+  .interpolator(d3.interpolateRgbBasis(["#9fbfff", "White", "#ff3800"]));
+
+  svg.selectAll(".xColumn").data(data).enter().append("circle")
+    .attr("cx", function(d,i){return 30 + i*60;})
+    .attr("cy", 150).attr("r", 19)
 
 
   // Create the z(age) slider for filtering data  
@@ -159,10 +163,10 @@ function updateScatterPlot (data, svg, slideContainer) {
   sliderInput.oninput = function(){
       let filteredAge = uniqueAges[this.value]
       slideContainer.selectAll("label").html(
-          "Cohort Age: <br>"+numberFormatToString(filteredAge) + " years"
+          "Star Cluster Age: <br>"+numberFormatToString(filteredAge) + " years"
         );
 
-        updateScatterPlotDots (data.filter( d => d.Age === filteredAge), svg, x, y, z, xColumn, yColumn, zColumn)
+        updateScatterPlotDots (data.filter( d => d.Age === filteredAge), svg, x, y, z, xColumn, yColumn, zColumn, myColor)
         sliderInput.style.setProperty('background', z(filteredAge))
     }
   sliderInput.oninput();
@@ -194,7 +198,7 @@ var myCols = ["#ff3800","#ff5300","#ff6500","#ff7300","#ff7e00","#ff8912","#ff93
       .attr("text-anchor", "middle")
       .attr("x", width / 2)
       .attr("y", height - marginBottom / 2 + 10)
-      .text("Temperature (Kelvin)");
+      .text("log(Temperature(Kelvin))");
 
   // Add the Y Axis Label
   var yAxisLabel = svg.append("text")
@@ -203,7 +207,7 @@ var myCols = ["#ff3800","#ff5300","#ff6500","#ff7300","#ff7e00","#ff8912","#ff93
     .attr("x", - height / 2)
     .attr("y", marginTop - 10)
     .attr("transform", "rotate(-90)")
-    .text("Luminosity (Sun=1)");
+    .text("Luminosity (ergs)");
 
 
   // Add the temperature legend
@@ -241,7 +245,7 @@ var colorLegend = svg.append("rect")
 .attr("fill","url(#colorLegend)")
 .attr("x", marginLeft)
 .attr("y", marginBottom * 8.75)
-.attr("width", width * 0.88)
+.attr("width", width * 0.905)
 .attr("height", 13);
 
 d3.select('#colorLegend').append('stop')
@@ -250,12 +254,12 @@ d3.select('#colorLegend').append('stop')
 .style('stop-opacity', 1);
 
 d3.select('#colorLegend').append('stop')
-.attr('offset', ((xMax) - (9.9))/((xMax)-(xMin))*100 + '%') //color corresponding to 20000K
+.attr('offset', ((xMax) - Math.log10(29800))/((xMax)-(xMin))*100 + '%') //color corresponding to 20000K
 .style('stop-color', myCols[myCols.length-1])
 .style('stop-opacity', 1);
 
 d3.select('#colorLegend').append('stop')
-.attr('offset', ((xMax)-(8.76))/((xMax)-(xMin))*100 + '%') //color corresponding to 6000K (almost white)
+.attr('offset', ((xMax)-Math.log10(6400))/((xMax)-(xMin))*100 + '%') //color corresponding to 6000K (almost white)
 .style('stop-color', "#fff8fb" )
 .style('stop-opacity', 1);
 
@@ -264,15 +268,10 @@ d3.select('#colorLegend').append('stop')
 .style('stop-color', myCols[3]) //color corresponding to 1500K
 .style('stop-opacity', 1);
 
-
-
-
-
-
   
 }
 
-function updateScatterPlotDots(data, svg, x, y, z, xColumn, yColumn, zColumn) {
+function updateScatterPlotDots(data, svg, x, y, z, xColumn, yColumn, zColumn, colorMapperfnc) {
   // ****************** Dots section ***************************
 
   // add dots
@@ -285,6 +284,8 @@ function updateScatterPlotDots(data, svg, x, y, z, xColumn, yColumn, zColumn) {
     .attr("cy", (d) => y(d[yColumn]))
     .attr("r", 2)
     .attr("fill", d => z(d[zColumn]))
+    .attr("class", "datapoint"); // Adding a class for easier selection
+
 
   // Add mouseover and onclick events
   dotsEnter.on('mouseover', function (event, d) {
@@ -292,21 +293,53 @@ function updateScatterPlotDots(data, svg, x, y, z, xColumn, yColumn, zColumn) {
         .duration('50')
         .attr("class", "hovered")
         .attr('opacity', '.85');
-      d3.select(TOOLBOX_ID).html(
-        "Age: "         + numberFormatToString(d.Age) + " years <br><br>" +
-        "Mass: "        + d.mass + "<br><br>" +
-        "Temperature: " + d.logTe + "<br><br>" +
-        "Luminosity: "  + d.logL + "<br><br>"
+
+      // Calculate the position of the tooltip relative to the data point
+      const tooltipX = event.pageX + 7; // Adjust these values for proper positioning
+      const tooltipY = event.pageY - 7; // Adjust these values for proper positioning
+
+      // Create and position a div for the tooltip
+      const tooltip = d3.select("body")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("left", tooltipX + "px")
+        .style("top", tooltipY + "px")
+        .style("transform", `translate(${10}px, ${-10}px)`)
+        .html(
+          "Hi! I am a star! Here are some of my current properties: <br><br>" +
+          "Age: " + numberFormatToString(d.Age) + " years <br><br>" +
+          "Mass: " + d.mass + "<br><br>" +
+          "Temperature: " + d.logTe + "<br><br>" +
+          "Luminosity: " + d.logL + "<br><br>"
         );
-    })
-    .on('mouseout', function (d, i) {
-      d3.select(this).transition()
-        .duration('50')
-        .attr("class", null)
-        .attr('opacity', '1');
-      d3.select(TOOLBOX_ID)
-        .html("Hover your mouse over a star to see its stellar properties"); 
-    })
+
+      // Removing the tooltip on mouseout
+      d3.select(this).on('mouseout', function () {
+        d3.select(this).transition()
+          .duration('50')
+          .attr("class", "datapoint")
+          .attr('opacity', '1');
+        tooltip.remove();
+      });
+      
+      //  d3.select(TOOLBOX_ID).html(
+       // "Age: "         + numberFormatToString(d.Age) + " years <br><br>" +
+        //"Mass: "        + d.mass + "<br><br>" +
+       // "Temperature: " + d.logTe + "<br><br>" +
+        //"Luminosity: "  + d.logL + "<br><br>"
+       // );
+    });
+    //.on('mouseout', function (d, i) {
+      //d3.select(this).transition()
+        //.duration('50')
+        //.attr("class", "datapoint")
+        //.attr("class", null)
+        //.attr('opacity', '1');
+      //d3.select(TOOLBOX_ID)
+        //.html("Hover your mouse over a star to see its stellar properties");
+      //tooltip.remove(); 
+    //})
 
   dotsEnter.on("click", function(event, d){
     console.log("x: " + d[xColumn] + ", y: " + d[yColumn])
@@ -317,7 +350,7 @@ function updateScatterPlotDots(data, svg, x, y, z, xColumn, yColumn, zColumn) {
     .attr("cx", (d) => x(d[xColumn]))
     .attr("cy", (d) => y(d[yColumn]))
     .attr("r", 2)
-    .attr("fill", d => z(d[zColumn]))
+    .attr("fill", d => colorMapperfnc(x(d[xColumn])))
 
   // EXIT dots
   let dotsExit = dots.exit()
